@@ -13,13 +13,15 @@ public class Order {
     private LocalDate dateOrder;
     private String comment;
     private String status;
+    private int daysLate;
     //TODO Bajo revisión
-    private Worker w1;
-    private Worker w2;
-    private Worker w3;
-    private Client c1;
-    private Client c2;
+    //un pepdido lo gestiona un trabajador y un pedido lo realiza un cliente cliente
+    private Worker worker;
+    private Client client;
 
+
+    //Atributo Estático
+    public static final int SHIPPING_DAYS = 5;
 
     //Constructor
     public Order() {
@@ -31,7 +33,6 @@ public class Order {
         comment = null;
         status = null;
     }
-
 
     //Getters y Setters
     public Product getP1() {
@@ -90,48 +91,37 @@ public class Order {
         this.status = status;
     }
 
-    public Worker getW1() {
-        return w1;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setW1(Worker w1) {
-        this.w1 = w1;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
-    public Worker getW2() {
-        return w2;
+    public Client getClient() {
+        return client;
     }
 
-    public void setW2(Worker w2) {
-        this.w2 = w2;
+    public void setClient(Client client) {
+        this.client = client;
     }
-
-    public Worker getW3() {
-        return w3;
-    }
-
-    public void setW3(Worker w3) {
-        this.w3 = w3;
-    }
-
-    public Client getC1() {
-        return c1;
-    }
-
-    public void setC1(Client c1) {
-        this.c1 = c1;
-    }
-
-    public Client getC2() {
-        return c2;
-    }
-
-    public void setC2(Client c2) {
-        this.c2 = c2;
-    }
-
 
     //Otros métodos
+
+    public boolean isEmpty() {
+        return p1 == null && p2 == null && p3 == null;
+    }
+
+    public boolean isFull() {
+        return p1 != null && p2 != null && p3 != null;
+    }
+
+    /*TODO mirar cómo cambiar el retraso | si el pedido se retrasa como calculo la nueva fecha sin saber cuantos dias se retrasa ni la fecha de entrega estimada*/
+
+    public LocalDate calculateDays() {
+        return dateOrder.plusDays(SHIPPING_DAYS + daysLate);//(SHIPPING_DAYS + Atributo de días de retraso) para calcular los días de retraso
+    }
 
     @Override
     public String toString() {
@@ -143,28 +133,8 @@ public class Order {
                 ", dateOrder=" + dateOrder +
                 ", comment='" + comment + '\'' +
                 ", status='" + status + '\'' +
-                ", w1=" + w1 +
-                ", w2=" + w2 +
-                ", w3=" + w3 +
-                ", c1=" + c1 +
-                ", c2=" + c2 +
+                ", worker=" + worker +
+                ", client=" + client +
                 '}';
     }
-
-
-    public boolean isEmpty() {
-        return p1 == null && p2 == null && p3 == null;
-    }
-
-    public boolean isFull() {
-        return p1 != null && p2 != null && p3 != null;
-    }
-
-    //TODO mirar cómo cambiar el retraso
-    public LocalDate calculateDays() {
-        LocalDate esteemedDays = dateOrder.plusDays(5);
-        return esteemedDays;
-    }
-
-
 }
