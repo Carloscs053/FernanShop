@@ -117,10 +117,12 @@ public class Order {
         return p1 != null && p2 != null && p3 != null;
     }
 
-    /*TODO mirar cómo cambiar el retraso | si el pedido se retrasa como calculo la nueva fecha sin saber cuantos dias se retrasa ni la fecha de entrega estimada*/
+    /*TODO mirar cómo cambiar el retraso | si el pedido se retrasa como calculo la nueva fecha sin saber cuantos
+       dias se retrasa ni la fecha de entrega estimada*/
 
     public LocalDate calculateDays() {
-        return dateOrder.plusDays(SHIPPING_DAYS + daysLate);//(SHIPPING_DAYS + Atributo de días de retraso) para calcular los días de retraso
+        return dateOrder.plusDays(SHIPPING_DAYS + daysLate);//(SHIPPING_DAYS + Atributo de días de retraso)
+        // para calcular los días de retraso
     }
 
     @Override

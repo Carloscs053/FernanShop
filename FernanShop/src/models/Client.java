@@ -28,6 +28,8 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
+        //TODO ¿cada vez que se crea un cliente se aumenta en 1 el pedido? quizás haya que cambiarlo de lugar
+        //TODO probablemente sea más eficiente crear objetos de productos en esta clase y comprobar nulls
         orderCount++;
     }
 
@@ -106,8 +108,20 @@ public class Client {
     }
 
     //Otros métodos
-    public boolean validePhoneNumber(String phoneNumber) {
+    public boolean validatePhoneNumber(String phoneNumber) {
         return phoneNumber.length() == 9;
+    }
+
+    //TODO borrador, pensar qué más cosas meter o cómo modificarlo
+    public boolean validateEmail() {
+        if (email.isEmpty()) return false;
+        if (!email.contains("@") && !(email.contains(".com") || email.contains(".es"))) return false;
+        return true;
+    }
+
+    //TODO
+    public void makeOrder() {
+
     }
 
 
