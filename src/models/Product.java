@@ -18,7 +18,9 @@ public class Product {
     }
 
     public Product(Product product) {
-
+        this.code = product.code;
+        this.name = product.name;
+        this.price = product.price;
     }
 
     //Getters y Setters

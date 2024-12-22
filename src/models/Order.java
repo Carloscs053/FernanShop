@@ -1,7 +1,7 @@
 package models;
 
 import java.time.LocalDate;
-import java.util.Date;
+import models.Product;
 
 public class Order {
 
@@ -19,19 +19,18 @@ public class Order {
     private Worker worker;
     private Client client;
 
-
     //Atributo Estático
     public static final int SHIPPING_DAYS = 5;
 
+    public Order(Product p1, Client client, String status, String code) {
+        this.p1 = new Product(p1);
+        this.client = client;
+        this.status = status;
+        this.code = code;
+    }
+
     //Constructor
     public Order() {
-        p1 = null;
-        p2 = null;
-        p3 = null;
-        code = null;
-        dateOrder = LocalDate.now();
-        comment = null;
-        status = null;
     }
 
     //Getters y Setters

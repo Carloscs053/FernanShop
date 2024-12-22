@@ -9,4 +9,10 @@ public class Utils {
         System.out.println("Pulse cualquier tecla para continuar...");
         s.nextLine();
     }
+
+    public static void cleanScreen(){
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
 }

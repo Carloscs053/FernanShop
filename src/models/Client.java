@@ -3,7 +3,7 @@ package models;
 public class Client {
 
     //Atributos
-    private String name;
+    private static String name;
     private String surnames;
     private String address;
     private String locality;
@@ -111,6 +111,7 @@ public class Client {
     public boolean validatePhoneNumber(String phoneNumber) {
         return phoneNumber.length() == 9;
     }
+
 
     //TODO borrador, pensar qué más cosas meter o cómo modificarlo
     public boolean validateEmail() {
