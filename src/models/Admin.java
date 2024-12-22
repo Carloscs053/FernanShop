@@ -53,5 +53,6 @@ public class Admin {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+
     }
 }

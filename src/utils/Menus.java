@@ -68,7 +68,6 @@ public class Menus {
                  ==== Asignación del pedido %d o %s  ====
                  1. %s - %d pedido en proceso
                  2. %s - %d pedidos en proceso
-                 Seleccione el trabajador:\s
-                """);
+                 Seleccione el trabajador:\s""");
     }
 }

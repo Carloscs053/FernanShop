@@ -50,5 +50,6 @@ public class Worker {
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 '}';
+
     }
 }

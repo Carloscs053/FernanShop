@@ -74,6 +74,7 @@ public class Product {
         String salida = "";
         salida += "Nombre: " + name + "\n"
                 + "Precio: " + price;
+
         return salida;
     }
 
