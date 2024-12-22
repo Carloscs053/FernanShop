@@ -1,6 +1,7 @@
 package models;
 
 import java.time.LocalDate;
+
 import models.Product;
 
 public class Order {
@@ -22,15 +23,30 @@ public class Order {
     //Atributo Estático
     public static final int SHIPPING_DAYS = 5;
 
-    public Order(Product p1, Client client, String status, String code) {
+    //revisar los constructores
+    //Constructor
+
+    public Order(Product p1, Product p2, Product p3, String code, LocalDate dateOrder, String comment, String status, int daysLate, Worker worker, Client client) {
+        this.p1 = null;
+        this.p2 = null;
+        this.p3 = null;
+        this.code = code;
+        this.dateOrder = LocalDate.now();
+        this.comment = null;
+        this.status = status;
+        this.daysLate = 0;
+        this.worker = worker;
+        this.client = client;
+    }
+
+    //Constructor copia
+    public Order(Product p1, Product p2, Product p3, Client client, String status, String code) {
         this.p1 = new Product(p1);
+        this.p2 = new Product(p2);
+        this.p3 = new Product(p3);
         this.client = client;
         this.status = status;
         this.code = code;
-    }
-
-    //Constructor
-    public Order() {
     }
 
     //Getters y Setters
@@ -124,7 +140,18 @@ public class Order {
         // para calcular los días de retraso
     }
 
+
+    public boolean fullProduct(){
+        return (p1 != null && p2 != null && p3 != null );
+    }
+
+    public boolean emptyProduct(){
+        return (p1 == null && p2 == null && p3 == null );
+    }
+
+
     @Override
+
     public String toString() {
         return "Order{" +
                 "p1=" + p1 +

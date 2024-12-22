@@ -49,4 +49,18 @@ public class Menus {
                 \n
                 Seleccione una opcion:\s""", name);
     }
+
+    public void name(){//TODO TERMINARLO 22/12
+        System.out.printf("""
+                 ==== Actualización del pedido %d ====
+                 Estado del pedido: %s
+                 Nuevo estado:
+                \t1. Recibido
+                \t2. En Preparación
+                \t3. Retrasado
+                \t4. Cancelado
+                \t5. Enviado
+                Seleccione el nuevo estado:\s
+                """);
+    }
 }

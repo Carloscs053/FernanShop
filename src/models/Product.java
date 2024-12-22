@@ -69,9 +69,15 @@ public class Product {
         return true;
     }
 
+    /*Para printar un producto yo creo que lo mas lógico es solo poner el nombre y precio*/
+    public String pintaproducto(){
+        String salida = "";
+        salida += "Nombre: " + name + "\n"
+                + "Precio: " + price;
+        return salida;
+    }
 
     //toString
-
     @Override
     public String toString() {
         return "Product{" +

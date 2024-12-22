@@ -3,7 +3,7 @@ package models;
 public class Client {
 
     //Atributos
-    private static String name;
+    private  String name;
     private String surnames;
     private String address;
     private String locality;
@@ -11,6 +11,8 @@ public class Client {
     private String phoneNumber;
     private String email;
     private String password;
+    private Order p1;
+    private Order p2;
 
     //Atributos de la clase
     private static int orderCount = 0;
@@ -116,8 +118,7 @@ public class Client {
     //TODO borrador, pensar qué más cosas meter o cómo modificarlo
     public boolean validateEmail() {
         if (email.isEmpty()) return false;
-        if (!email.contains("@") && !(email.contains(".com") || email.contains(".es"))) return false;
-        return true;
+        return email.contains("@") || (email.contains(".com") || email.contains(".es"));
     }
 
     //TODO
