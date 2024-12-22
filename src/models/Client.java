@@ -118,8 +118,12 @@ public class Client {
     //TODO borrador, pensar qué más cosas meter o cómo modificarlo
     public boolean validateEmail() {
         if (email.isEmpty()) return false;
-        return email.contains("@") || (email.contains(".com") || email.contains(".es"));
+        return !email.startsWith("@") && email.contains("@") && (email.endsWith(".com") || email.endsWith(".es"));
     }
+
+    /*
+    Pattern pattern = Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
+		Matcher matcher = pattern.matcher(email);*/
 
     //TODO
     public void makeOrder() {
