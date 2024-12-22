@@ -1,7 +1,6 @@
 package utils;
 
 
-
 public class Menus {
     //TODO investigar cómo printear el nombre necesario aquí
     public void clientMenu(String name) {
@@ -50,7 +49,7 @@ public class Menus {
                 Seleccione una opcion:\s""", name);
     }
 
-    public void name(){//TODO TERMINARLO 22/12
+    public void name() {//TODO TERMINARLO 22/12
         System.out.printf("""
                  ==== Actualización del pedido %d ====
                  Estado del pedido: %s
@@ -61,6 +60,15 @@ public class Menus {
                 \t4. Cancelado
                 \t5. Enviado
                 Seleccione el nuevo estado:\s
+                """);
+    }
+
+    public void asigancionPedidos() {
+        System.out.printf("""
+                 ==== Asignación del pedido %d o %s  ====
+                 1. %s - %d pedido en proceso
+                 2. %s - %d pedidos en proceso
+                 Seleccione el trabajador:\s
                 """);
     }
 }
