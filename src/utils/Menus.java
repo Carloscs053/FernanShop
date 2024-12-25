@@ -3,7 +3,7 @@ package utils;
 
 public class Menus {
     //TODO investigar cómo printear el nombre necesario aquí
-    public void clientMenu(String name) {
+    public void menuCliente(String name) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s
@@ -18,7 +18,7 @@ public class Menus {
     }
 
     //TODO más de lo mismo
-    public void workerMenu(String name) {
+    public void menuTrabajador(String name) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s. Tienes %d pedidos que gestionar
@@ -34,7 +34,7 @@ public class Menus {
     }
 
     //TODO same
-    public void adminMenu(String name) {
+    public void menuAdmin(String name) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s. Tiene %d pedido por asignar.
@@ -49,7 +49,7 @@ public class Menus {
                 Seleccione una opcion:\s""", name);
     }
 
-    public void name() {//TODO TERMINARLO 22/12
+    public void menuEstado() {//TODO TERMINARLO 22/12
         System.out.printf("""
                  ==== Actualización del pedido %d ====
                  Estado del pedido: %s
@@ -63,7 +63,7 @@ public class Menus {
                 """);
     }
 
-    public void asigancionPedidos() {
+    public void menuAsignaPedido() {
         System.out.printf("""
                  ==== Asignación del pedido %d o %s  ====
                  1. %s - %d pedido en proceso

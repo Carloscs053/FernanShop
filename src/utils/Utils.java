@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 
 public class Utils {
     //TODO estoy tocando cosas relativamente insignificantes y eso que nos vamos ahorrando en tiempo de desarrollo
-    public static void pressToContinue() {
+    public static void presionaContinuar() {
         var s  = new Scanner(System.in);
         System.out.println("Pulse cualquier tecla para continuar...");
         s.nextLine();
     }
 
-    public static void cleanScreen() {
+    public static void limpiaPantalla() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }

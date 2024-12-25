@@ -3,26 +3,26 @@ package models;
 public class Admin {
 
     //Atributos
-    private String name;
+    private String nombre;
     private String email;
-    private String password;
+    private String contrasenia;
 
 
     //Constructor
-    public Admin(String name, String email, String password) {
-        this.name = name;
+    public Admin(String nombre, String email, String contrasenia) {
+        this.nombre = nombre;
         this.email = email;
-        this.password = password;
+        this.contrasenia = contrasenia;
     }
-
 
     //Getters y Setters
-    public String getName() {
-        return name;
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEmail() {
@@ -33,25 +33,22 @@ public class Admin {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
-
 
     //Otros métodos
-
-
 
     @Override
     public String toString() {
         return "Admin{" +
-                "name='" + name + '\'' +
+                "name='" + nombre + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + contrasenia + '\'' +
                 '}';
 
     }

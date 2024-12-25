@@ -3,9 +3,9 @@ package models;
 public class Worker {
 
     //Atributos
-    private String name;
+    private String nombre;
     private String email;
-    private int phoneNumber;
+    private int telefono;
     //private cont?
     //private pese...?
     //No los veo bien en el UML, cosa que deberíamos desarrollar más en profundidad antes de continuar (creo)
@@ -15,12 +15,13 @@ public class Worker {
 
 
     //Getters y Setters
-    public String getName() {
-        return name;
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEmail() {
@@ -31,24 +32,22 @@ public class Worker {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public int getTelefono() {
+        return telefono;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
-
 
     //Otros métodos
-
 
     @Override
     public String toString() {
         return "Worker{" +
-                "name='" + name + '\'' +
+                "name='" + nombre + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", phoneNumber=" + telefono +
                 '}';
 
     }

@@ -3,41 +3,40 @@ package models;
 public class Product {
 
     //Atributos
-    private String code;
-    private String name;
+    private String codigo;
+    private String nombre;
     private int stock;
-    private double price;
+    private double precio;
 
 
     //Constructor
-    public Product(String code, String name, int stock, double price) {
-        this.code = code;
-        this.name = name;
+    public Product(String codigo, String nombre, int stock, double precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
         this.stock = stock;
-        this.price = price;
+        this.precio = precio;
     }
 
     public Product(Product product) {
-        this.code = product.code;
-        this.name = product.name;
-        this.price = product.price;
+        this.codigo = product.codigo;
+        this.nombre = product.nombre;
+        this.precio = product.precio;
     }
 
-    //Getters y Setters
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getStock() {
@@ -48,12 +47,12 @@ public class Product {
         this.stock = stock;
     }
 
-    public double getPrice() {
-        return price;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     //Otros métodos
@@ -69,11 +68,11 @@ public class Product {
         return true;
     }
 
-    /*Para printar un producto yo creo que lo mas lógico es solo poner el nombre y precio*/
+    /*Para printar un producto yo creo que lo más lógico es solo poner el nombre y precio*/
     public String pintaproducto(){
         String salida = "";
-        salida += "Nombre: " + name + "\n"
-                + "Precio: " + price;
+        salida += "Nombre: " + nombre + "\n"
+                + "Precio: " + precio;
 
         return salida;
     }
@@ -82,9 +81,9 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "name='" + name + '\'' +
+                "name='" + nombre + '\'' +
                 ", stock=" + stock +
-                ", price=" + price +
+                ", price=" + precio +
                 '}';
     }
 }

@@ -10,11 +10,11 @@ public class Order {
     private Product p1;
     private Product p2;
     private Product p3;
-    private String code;
-    private LocalDate dateOrder;
-    private String comment;
-    private String status;
-    private int daysLate;
+    private String codigo;
+    private LocalDate fechaPedido;
+    private String comentario;
+    private String estado;
+    private int diasRetraso;
     //TODO Bajo revisión
     //un pepdido lo gestiona un trabajador y un pedido lo realiza un cliente cliente
     private Worker worker;
@@ -26,15 +26,15 @@ public class Order {
     //revisar los constructores
     //Constructor
 
-    public Order(Product p1, Product p2, Product p3, String code, LocalDate dateOrder, String comment, String status, int daysLate, Worker worker, Client client) {
+    public Order(Product p1, Product p2, Product p3, String codigo, LocalDate fechaPedido, String comentario, String estado, int diasRetraso, Worker worker, Client client) {
         this.p1 = null;
         this.p2 = null;
         this.p3 = null;
-        this.code = code;
-        this.dateOrder = LocalDate.now();
-        this.comment = null;
-        this.status = status;
-        this.daysLate = 0;
+        this.codigo = codigo;
+        this.fechaPedido = LocalDate.now();
+        this.comentario = null;
+        this.estado = estado;
+        this.diasRetraso = 0;
         this.worker = worker;
         this.client = client;
     }
@@ -45,11 +45,12 @@ public class Order {
         this.p2 = new Product(p2);
         this.p3 = new Product(p3);
         this.client = client;
-        this.status = status;
-        this.code = code;
+        this.estado = status;
+        this.codigo = code;
     }
 
     //Getters y Setters
+
     public Product getP1() {
         return p1;
     }
@@ -74,36 +75,44 @@ public class Order {
         this.p3 = p3;
     }
 
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public LocalDate getDateOrder() {
-        return dateOrder;
+    public LocalDate getFechaPedido() {
+        return fechaPedido;
     }
 
-    public void setDateOrder(LocalDate dateOrder) {
-        this.dateOrder = dateOrder;
+    public void setFechaPedido(LocalDate fechaPedido) {
+        this.fechaPedido = fechaPedido;
     }
 
-    public String getComment() {
-        return comment;
+    public String getComentario() {
+        return comentario;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public int getDiasRetraso() {
+        return diasRetraso;
+    }
+
+    public void setDiasRetraso(int diasRetraso) {
+        this.diasRetraso = diasRetraso;
     }
 
     public Worker getWorker() {
@@ -122,6 +131,7 @@ public class Order {
         this.client = client;
     }
 
+
     //Otros métodos
 
     public boolean isEmpty() {
@@ -136,7 +146,7 @@ public class Order {
        dias se retrasa ni la fecha de entrega estimada*/
 
     public LocalDate calculateDays() {
-        return dateOrder.plusDays(SHIPPING_DAYS + daysLate);//(SHIPPING_DAYS + Atributo de días de retraso)
+        return fechaPedido.plusDays(SHIPPING_DAYS + diasRetraso);//(SHIPPING_DAYS + Atributo de días de retraso)
         // para calcular los días de retraso
     }
 
@@ -156,10 +166,10 @@ public class Order {
                 "p1=" + p1 +
                 ", p2=" + p2 +
                 ", p3=" + p3 +
-                ", code='" + code + '\'' +
-                ", dateOrder=" + dateOrder +
-                ", comment='" + comment + '\'' +
-                ", status='" + status + '\'' +
+                ", code='" + codigo + '\'' +
+                ", dateOrder=" + fechaPedido +
+                ", comment='" + comentario + '\'' +
+                ", status='" + estado + '\'' +
                 ", worker=" + worker +
                 ", client=" + client +
                 '}';

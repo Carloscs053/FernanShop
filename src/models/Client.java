@@ -3,14 +3,14 @@ package models;
 public class Client {
 
     //Atributos
-    private  String name;
-    private String surnames;
-    private String address;
-    private String locality;
-    private String province;
-    private String phoneNumber;
+    private  String nombre;
+    private String apellidos;
+    private String direccion;
+    private String localidad;
+    private String provincia;
+    private String telefono;
     private String email;
-    private String password;
+    private String contrasenia;
     private Order p1;
     private Order p2;
 
@@ -20,16 +20,16 @@ public class Client {
 
     //Constructor
 
-    public Client(String name, String surnames, String address, String locality, String province,
-                  String phoneNumber, String email, String password) {
-        this.name = name;
-        this.surnames = surnames;
-        this.address = address;
-        this.locality = locality;
-        this.province = province;
-        this.phoneNumber = phoneNumber;
+    public Client(String nombre, String apellidos, String direccion, String localidad, String provincia,
+                  String telefono, String email, String contrasenia) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.localidad = localidad;
+        this.provincia = provincia;
+        this.telefono = telefono;
         this.email = email;
-        this.password = password;
+        this.contrasenia = contrasenia;
         //TODO ¿cada vez que se crea un cliente se aumenta en 1 el pedido? quizás haya que cambiarlo de lugar
         //TODO probablemente sea más eficiente crear objetos de productos en esta clase y comprobar nulls
         orderCount++;
@@ -37,52 +37,54 @@ public class Client {
 
 
     //Getters y Setters
-    public String getName() {
-        return name;
+
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getSurnames() {
-        return surnames;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setSurnames(String surnames) {
-        this.surnames = surnames;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getLocality() {
-        return locality;
+    public String getLocalidad() {
+        return localidad;
     }
 
-    public void setLocality(String locality) {
-        this.locality = locality;
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
     }
 
-    public String getProvince() {
-        return province;
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getEmail() {
@@ -93,12 +95,28 @@ public class Client {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Order getP1() {
+        return p1;
+    }
+
+    public void setP1(Order p1) {
+        this.p1 = p1;
+    }
+
+    public Order getP2() {
+        return p2;
+    }
+
+    public void setP2(Order p2) {
+        this.p2 = p2;
     }
 
     public static int getOrderCount() {
@@ -110,13 +128,13 @@ public class Client {
     }
 
     //Otros métodos
-    public boolean validatePhoneNumber(String phoneNumber) {
+    public boolean validaTelefono(String phoneNumber) {
         return phoneNumber.length() == 9;
     }
 
 
     //TODO borrador, pensar qué más cosas meter o cómo modificarlo
-    public boolean validateEmail() {
+    public boolean validaEmail() {
         if (email.isEmpty()) return false;
         return !email.startsWith("@") && email.contains("@") && (email.endsWith(".com") || email.endsWith(".es"));
     }
@@ -133,14 +151,14 @@ public class Client {
     @Override
     public String toString() {
         return "Client{" +
-                "name='" + name + '\'' +
-                ", surnames='" + surnames + '\'' +
-                ", address='" + address + '\'' +
-                ", locality='" + locality + '\'' +
-                ", province='" + province + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                "name='" + nombre + '\'' +
+                ", surnames='" + apellidos + '\'' +
+                ", address='" + direccion + '\'' +
+                ", locality='" + localidad + '\'' +
+                ", province='" + provincia + '\'' +
+                ", phoneNumber='" + telefono + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + contrasenia + '\'' +
                 ", orderCount=" + orderCount +
                 '}';
     }
