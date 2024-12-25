@@ -3,11 +3,12 @@ package models;
 public class Client {
 
     //Atributos
-    private  String nombre;
+    private String nombre;
     private String apellidos;
     private String direccion;
     private String localidad;
     private String provincia;
+    //TODO cambiaría a int y metería validación
     private String telefono;
     private String email;
     private String contrasenia;
@@ -128,13 +129,14 @@ public class Client {
     }
 
     //Otros métodos
+    //TODO meter validación de que sean dígitos
     public boolean validaTelefono(String phoneNumber) {
         return phoneNumber.length() == 9;
     }
 
 
     //TODO borrador, pensar qué más cosas meter o cómo modificarlo
-    public boolean validaEmail() {
+    public boolean validaEmail(String email) {
         if (email.isEmpty()) return false;
         return !email.startsWith("@") && email.contains("@") && (email.endsWith(".com") || email.endsWith(".es"));
     }
