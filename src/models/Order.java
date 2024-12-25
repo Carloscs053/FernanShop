@@ -2,9 +2,9 @@ package models;
 
 import java.time.LocalDate;
 
-import models.Product;
-
 public class Order {
+    //TODO yo diría que esto no es un controlador realmente, tan solo una clase más que contiene info,
+    // hay que pensar cual es el controlador. Quizás una clase "Tienda"
 
     //Atributos
     private Product p1;
@@ -17,6 +17,8 @@ public class Order {
     private int diasRetraso;
     //TODO Bajo revisión
     //un pepdido lo gestiona un trabajador y un pedido lo realiza un cliente cliente
+    //Creo que aquí no hay que crear los usuarios, dentro de cada user se guardan los datos de los pedidos creados en
+    // p1 y p2, los usuarios no dependen del pedido sino que los pedidos del usuario
     private Worker worker;
     private Client client;
 
@@ -133,30 +135,19 @@ public class Order {
 
 
     //Otros métodos
-
-    public boolean isEmpty() {
-        return p1 == null && p2 == null && p3 == null;
-    }
-
-    public boolean isFull() {
-        return p1 != null && p2 != null && p3 != null;
-    }
-
     /*TODO mirar cómo cambiar el retraso | si el pedido se retrasa como calculo la nueva fecha sin saber cuantos
        dias se retrasa ni la fecha de entrega estimada*/
-
     public LocalDate calculateDays() {
         return fechaPedido.plusDays(SHIPPING_DAYS + diasRetraso);//(SHIPPING_DAYS + Atributo de días de retraso)
         // para calcular los días de retraso
     }
 
-
-    public boolean fullProduct(){
-        return (p1 != null && p2 != null && p3 != null );
+    public boolean estaLleno() {
+        return (p1 != null && p2 != null && p3 != null);
     }
 
-    public boolean emptyProduct(){
-        return (p1 == null && p2 == null && p3 == null );
+    public boolean estaVacio() {
+        return (p1 == null && p2 == null && p3 == null);
     }
 
 

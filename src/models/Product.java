@@ -56,15 +56,15 @@ public class Product {
     }
 
     //Otros métodos
-    public boolean removeStock(int amount) {
-        if (amount < 0 || amount > stock) return false;
-        stock -= amount;
+    public boolean quitaStock(int cantidad) {
+        if (cantidad < 0 || cantidad > stock) return false;
+        stock -= cantidad;
         return true;
     }
 
-    public boolean increaseStock(int amount) {
-        if (amount < 0) return false;
-        stock += amount;
+    public boolean aumentaStock(int cantidad) {
+        if (cantidad < 0) return false;
+        stock += cantidad;
         return true;
     }
 
