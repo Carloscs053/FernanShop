@@ -63,6 +63,33 @@ public class Menus {
                 """);
     }
 
+    public void estadoPedido(){
+        System.out.printf("""
+                ===========  Pedido %s o %d ===========
+                Estado: %s
+                Cliente: %s
+                Dirección: %s
+                Localidad: %s
+                Teléfono: %d
+                Correo: %s
+                Fecha del Pedido: %s
+                Fecha de entrega estimada: %s
+                Comentario del pedido: %s
+                Detalle del pedido
+                \t%s
+                \t%s
+                Total pedido: %f
+                """);
+    }
+
+    public void pedidosTrabajador(){
+        System.out.printf("""
+                ==== Asiganción de trabajadores a pedidos ====
+                1. %d - %s - %d prodcutos - %f
+                2. %d - %s - %d prodcutos - %f
+                Seleccione el pedido a asignar :\s""");
+    }
+
     public void menuAsignaPedido() {
         System.out.printf("""
                  ==== Asignación del pedido %d o %s  ====

@@ -16,7 +16,7 @@ public class Client {
     private Order p2;
 
     //Atributos de la clase
-    private static int orderCount = 0;
+    private static int contadorPedidos = 0;
 
 
     //Constructor
@@ -33,12 +33,10 @@ public class Client {
         this.contrasenia = contrasenia;
         //TODO ¿cada vez que se crea un cliente se aumenta en 1 el pedido? quizás haya que cambiarlo de lugar
         //TODO probablemente sea más eficiente crear objetos de productos en esta clase y comprobar nulls
-        orderCount++;
+        //contadorPedidos++;  TODO Esto es cierto que va en el metodo de crear pedido
     }
 
-
     //Getters y Setters
-
 
     public String getNombre() {
         return nombre;
@@ -121,11 +119,11 @@ public class Client {
     }
 
     public static int getOrderCount() {
-        return orderCount;
+        return contadorPedidos;
     }
 
-    public static void setOrderCount(int orderCount) {
-        Client.orderCount = orderCount;
+    public static void setContadorPedidos(int contadorPedidos) {
+        Client.contadorPedidos = contadorPedidos;
     }
 
     //Otros métodos
@@ -133,7 +131,6 @@ public class Client {
     public boolean validaTelefono(String phoneNumber) {
         return phoneNumber.length() == 9;
     }
-
 
     //TODO borrador, pensar qué más cosas meter o cómo modificarlo
     public boolean validaEmail(String email) {
@@ -161,7 +158,7 @@ public class Client {
                 ", phoneNumber='" + telefono + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + contrasenia + '\'' +
-                ", orderCount=" + orderCount +
+                ", orderCount=" + contadorPedidos +
                 '}';
     }
 }
