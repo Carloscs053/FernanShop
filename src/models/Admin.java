@@ -1,22 +1,18 @@
 package models;
 
 public class Admin {
-
     //Atributos
     private String nombre;
     private String email;
-    private String contrasenia;
-
+    private String contrasena;
 
     //Constructor
-    public Admin(String nombre, String email, String contrasenia) {
+    public Admin(String nombre, String contrasena) {
         this.nombre = nombre;
-        this.email = email;
-        this.contrasenia = contrasenia;
+        this.contrasena = contrasena;
     }
 
     //Getters y Setters
-
     public String getNombre() {
         return nombre;
     }
@@ -33,23 +29,17 @@ public class Admin {
         this.email = email;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    //Otros métodos
-
+    //toString
     @Override
     public String toString() {
-        return "Admin{" +
-                "name='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + contrasenia + '\'' +
-                '}';
-
+        return "Admin{" + "nombre=" + nombre + ", contrasena=" + contrasena + ", email= " + email + '}';
     }
 }

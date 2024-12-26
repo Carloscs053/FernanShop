@@ -1,9 +1,14 @@
 package utils;
 
+import models.Admin;
+import models.Cliente;
+import models.Pedido;
+import models.Trabajador;
 
 public class Menus {
-    //TODO investigar cómo printear el nombre necesario aquí
-    public void menuCliente(String name) {
+
+    // Menú para el cliente
+    public void menuCliente(Cliente cliente) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s
@@ -14,11 +19,11 @@ public class Menus {
                 5.- Modificar mis datos personales
                 6.- Cerrar sesión
                 \n
-                Seleccione una opcion:\s""", name);
+                Seleccione una opcion:\s""", cliente.getNombre());
     }
 
-    //TODO más de lo mismo
-    public void menuTrabajador(String name) {
+    // Menú para el trabajador
+    public void menuTrabajador(Trabajador trabajador) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s. Tienes %d pedidos que gestionar
@@ -30,11 +35,11 @@ public class Menus {
                 6.- Modificar mis datos personales
                 7.- Cerrar sesión
                 \n
-                Seleccione una opcion:\s""", name);//TODO Mirar %d en trabajador y admin
+                Seleccione una opcion:\s""", trabajador.getNombre());
     }
 
-    //TODO same
-    public void menuAdmin(String name) {
+    // Menú para el administrador
+    public void menuAdmin(Admin admin) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s. Tiene %d pedido por asignar.
@@ -46,28 +51,29 @@ public class Menus {
                 6.- Ver todos los trabajadores
                 7.- Cerrar sesión
                 \n
-                Seleccione una opcion:\s""", name);
+                Seleccione una opcion:\s""", admin.getNombre());
     }
 
-    public void menuEstado() {//TODO TERMINARLO 22/12
+    // Menú para actualizar el estado de un pedido
+    public void menuEstado(Pedido pedido) {
         System.out.printf("""
-                 ==== Actualización del pedido %d ====
-                 Estado del pedido: %s
-                 Nuevo estado:
+                ==== Actualización del pedido %d ====
+                Estado del pedido: %s
+                Nuevo estado:
                 \t1. Recibido
                 \t2. En Preparación
                 \t3. Retrasado
                 \t4. Cancelado
                 \t5. Enviado
-                Seleccione el nuevo estado:\s
-                """);
+                Seleccione el nuevo estado:\s""", pedido.getCodigo(), pedido.getEstado());
     }
 
-    public void estadoPedido(){
+    // Mostrar el estado de un pedido
+    public void estadoPedido(Pedido pedido) {
         System.out.printf("""
-                ===========  Pedido %s o %d ===========
+                ===========  Pedido %d ===========
                 Estado: %s
-                Cliente: %s
+                Cliente: %s %s
                 Dirección: %s
                 Localidad: %s
                 Teléfono: %d
@@ -78,23 +84,24 @@ public class Menus {
                 Detalle del pedido
                 \t%s
                 \t%s
-                Total pedido: %f
-                """);
+                Total pedido: %f""", pedido.getCodigo(), pedido.getEstado(), pedido.getCliente().getNombre(), pedido.getCliente().getApellido(), pedido.getCliente().getDireccion(), pedido.getCliente().getLocalidad(), pedido.getCliente().getTelefono(), pedido.getCliente().getEmail(), pedido.getFechaPedido(), pedido.calculateDays(), pedido.getComentario(), pedido.getP1(), pedido.getP2(), pedido.getTotal());
     }
 
-    public void pedidosTrabajador(){
+    // Menú para mostrar los pedidos asignados a un trabajador
+    public void pedidosTrabajador(Pedido pedido) {
         System.out.printf("""
                 ==== Asiganción de trabajadores a pedidos ====
                 1. %d - %s - %d prodcutos - %f
                 2. %d - %s - %d prodcutos - %f
-                Seleccione el pedido a asignar :\s""");
+                Seleccione el pedido a asignar :\s""", pedido.getCodigo(), pedido.getCliente().getNombre(), pedido.getTotal(), pedido.getCodigo(), pedido.getCliente().getNombre(), pedido.getTotal());
     }
 
-    public void menuAsignaPedido() {
+    // Menú para asignar un pedido a un trabajador
+    public void menuAsignaPedido(Pedido pedido) {
         System.out.printf("""
-                 ==== Asignación del pedido %d o %s  ====
-                 1. %s - %d pedido en proceso
-                 2. %s - %d pedidos en proceso
-                 Seleccione el trabajador:\s""");
+                ==== Asignación del pedido %d  ====
+                1. %s - %d pedido en proceso
+                2. %s - %d pedidos en proceso
+                Seleccione el trabajador:\s""", pedido.getCodigo(), pedido.getTrabajador().getNombre(), pedido.getTrabajador().getContador(), pedido.getTrabajador().getNombre(), pedido.getTrabajador().getContador());
     }
 }
