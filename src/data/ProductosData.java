@@ -2,7 +2,7 @@ package data;
 
 import models.Producto;
 
-public class productosData {
+public class ProductosData {
     public static Producto Producto1 = new Producto("12h34", "Libreta Campus A4 5mm", 130, 3.76);
     public static Producto Producto2 = new Producto("1334", "Bolígrafo Bic Negro", 100, 1.30);
     public static Producto Producto3 = new Producto("12324", "Bolígrafo Bic Azul", 100, 1.99);

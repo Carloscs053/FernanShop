@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Utils {
     //TODO estoy tocando cosas relativamente insignificantes y eso que nos vamos ahorrando en tiempo de desarrollo
-    public static void presionaContinuar() {
+    public static void pulseParaContinuar() {
         var s  = new Scanner(System.in);
         System.out.println("Pulse cualquier tecla para continuar...");
         s.nextLine();
@@ -18,6 +18,8 @@ public class Utils {
         }
     }
 
+
+    //TODO métodos que deben ir a sus respectivas clases??
     // Método para validar un email utilizando una expresión regular
     //he buscado validar email en internet y con ayuda de mni hermano lo he puesto asi
     public static boolean validaEmail (String email) {

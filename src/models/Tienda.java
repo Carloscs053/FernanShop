@@ -12,7 +12,7 @@ public class Tienda {
     private Trabajador trabajador3;*/
 
     //Constructor
-    private Tienda() {
+    public Tienda() {
         this.cliente1 = null;
         this.cliente2 = null;
         /*this.trabajador1 = null;
