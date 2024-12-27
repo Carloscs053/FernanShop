@@ -5,8 +5,12 @@ public class Admin {
     private String nombre;
     private String email;
     private String contrasena;
+    private Trabajador trabajador1;
+    private Trabajador trabajador2;
+    private Trabajador trabajador3;
 
     //Constructor
+    //Deberíamos preestableces las credenciales, el constructor probablemente vaya vacío
     public Admin(String nombre, String contrasena) {
         this.nombre = nombre;
         this.contrasena = contrasena;
@@ -35,6 +39,29 @@ public class Admin {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+
+    //Otros métodos
+    public boolean loginAdmin(String nombre, String contrasena) {
+        if (this.nombre.equals(nombre) && this.contrasena.equals(contrasena)) return true;
+        return false;
+    }
+
+    public boolean altaTrabajador(Trabajador trabajador) {
+        if (trabajador1 == null) {
+            trabajador1 = trabajador;
+            return true;
+        }
+        if (trabajador2 == null) {
+            trabajador1 = trabajador;
+            return true;
+        }
+        if (trabajador3 == null) {
+            trabajador1 = trabajador;
+            return true;
+        }
+        return false;
     }
 
     //toString

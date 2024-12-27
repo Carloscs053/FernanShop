@@ -16,22 +16,23 @@ public class Pedido {
     private int diasRetraso;
     //TODO Bajo revisión
     //un pepdido lo gestiona un trabajador y un pedido lo realiza un cliente cliente
-    private Trabajador trabajador;
-    private Cliente cliente;
+    /*private Trabajador trabajador;
+    private Cliente cliente;*/
 
     //Atributo Estático
     public static final int SHIPPING_DAYS = 5;
 
     //Constructor
-    public Pedido(Producto p1, Producto p2, Producto p3, String comentario, String estado, int diasRetraso, Trabajador trabajador, Cliente cliente) {
+    //Trabajador y cliente quitados de parámetros para que no salten fallos, temporal
+    public Pedido(Producto p1, Producto p2, Producto p3, /*String comentario, String estado,*/ int diasRetraso) {
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
-        this.comentario = comentario;
-        this.estado = estado;
+        this.comentario = "";
+        this.estado = "En proceso";
         this.diasRetraso = diasRetraso;
-        this.trabajador = trabajador;
-        this.cliente = cliente;
+        /*this.trabajador = trabajador;
+        this.cliente = cliente;*/
         this.fechaPedido = LocalDate.now();
         this.codigo = generarCodigoAleatorio();
     }
@@ -101,7 +102,7 @@ public class Pedido {
         this.diasRetraso = diasRetraso;
     }
 
-    public Trabajador getTrabajador() {
+    /*public Trabajador getTrabajador() {
         return trabajador;
     }
 
@@ -115,7 +116,7 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
+    }*/
 
     //Otros métodos
 
@@ -133,6 +134,24 @@ public class Pedido {
     // Calcular la fecha de entrega considerando los días de retraso
     public LocalDate calculateDays() {
         return fechaPedido.plusDays(SHIPPING_DAYS + diasRetraso); //(SHIPPING_DAYS + Atributo de días de retraso) para calcular los días de retraso
+    }
+
+    //Método que agrega productos al pedido
+    //Lo pongo como boolean para que en el main se le de feedback al cliente de si se ha hecho o no
+    public boolean agragaProducto(Producto producto) {
+        if (p1 == null) {
+            p1 = producto;
+            return true;
+        }
+        if (p2 == null) {
+            p2 = producto;
+            return true;
+        }
+        if (p3 == null) {
+            p3 = producto;
+            return true;
+        }
+        return false;
     }
 
     // Obtener el total del pedido sumando los precios de los productos
