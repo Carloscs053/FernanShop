@@ -76,6 +76,7 @@ public class Tienda {
         return false;
     }
 
+    //En vez de poner en el login el nombre podria el email o un username o incluso que ambas opciones sean validad username y email
     public boolean loginCliente(String nombre, String contrasenia) {
         if (cliente1 != null && (nombre.equals(cliente1.getNombre()) && contrasenia.equals(cliente1.getContrasenia()))) return true;
         return cliente2 != null && (nombre.equals(cliente2.getNombre()) && contrasenia.equals(cliente2.getContrasenia()));

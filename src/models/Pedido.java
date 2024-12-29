@@ -34,7 +34,7 @@ public class Pedido {
         /*this.trabajador = trabajador;
         this.cliente = cliente;*/
         this.fechaPedido = LocalDate.now();
-        this.codigo = generarCodigoAleatorio();
+        //this.codigo = generarCodigoAleatorio();
     }
 
     //Getters y Setters
@@ -160,15 +160,15 @@ public class Pedido {
     }
 
     // Generar un código aleatorio utilizando números del 0 al 9, la fecha de pedido y las iniciales del cliente
-    public String generarCodigoAleatorio() {
+    /*public String generarCodigoAleatorio() {
         String fecha = fechaPedido.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String iniciales = cliente.getNombre().substring(0, 1) + cliente.getApellido().substring(0, 1);
         int numeroAleatorio = (int) (Math.random() * 10000); // Generar un número aleatorio de 4 dígitos
         return this.codigo = iniciales + fecha + String.format("%04d", numeroAleatorio);
-    }
+    }*/
 
     // Representar el pedido como una cadena de texto
-    @Override
+    /*@Override
     public String toString() {
         return "Pedido{" +
                 "p1=" + p1 +
@@ -181,5 +181,5 @@ public class Pedido {
                 ", trabajador=" + trabajador +
                 ", cliente=" + cliente +
                 '}';
-    }
+    }*/
 }

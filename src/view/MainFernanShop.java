@@ -1,13 +1,12 @@
 package view;
 
+import java.awt.*;
 import java.util.Scanner;
 
 import data.ClientesData;
 import data.TrabajadoresData;
-import models.Admin;
-import models.Cliente;
-import models.Tienda;
-import models.Trabajador;
+import models.*;
+import utils.Menus;
 import utils.Utils;
 
 public class MainFernanShop {
@@ -21,9 +20,10 @@ public class MainFernanShop {
         Trabajador trabajador2 = TrabajadoresData.trabajador2;
         Trabajador trabajador3 = TrabajadoresData.trabajador3;
         //TODO IMPORTANTE BALANCES Y REAJUSTES NO SE NOS VAYA A PASAR ESTO JAJAJAJAAJAJAJ
-        Admin admin = new Admin("Manuel", "goticasCulonas");
+        //Admin admin = new Admin("Manuel", "goticasCulonas");
+        Admin admin = new Admin("admin", "1234");
         String op = "";
-        boolean logueado = true;
+        boolean logueado = false;//logueado debe empezar en falso si no entra siempre
 
         do {
             System.out.println("""
@@ -38,32 +38,34 @@ public class MainFernanShop {
                     """);
             do {
                 //¿Metemos registros?
-                System.out.println("""
+                System.out.print("""
                         1. Iniciar Sesión.
-                        2. Cerrar programa""");
+                        2. Cerrar programa
+                        Seleccione una opción:\s""");
                 op = s.nextLine();
 
                 switch (op) {
                     case "1":
-                        System.out.println("Nombre: ");
+                        System.out.print("Nombre: ");
                         String nombre = s.nextLine();
-                        System.out.println("Contraseña: ");
+                        System.out.print("Contraseña: ");
                         String contrasenia = s.nextLine();
 
                         if (admin.loginAdmin(nombre, contrasenia)) {
                             logueado = true;
                             //Hay que poner cosas, es un "boceto"
-                            System.out.println("Bienvenido" + admin.getNombre());
-                        } else if (Trabajador.(nombre, contrasenia)) { //Hay que echar un ojo, mirar en fernanelf, me tengo que ir
+                            //System.out.println("Bienvenido" + admin.getNombre());//Esto ya sobraria.
+                            Menus.menuAdmin(nombre);
+                        } /*else if (Trabajador.loginTrabajador(nombre, contrasenia)) { //Hay que echar un ojo, mirar en fernanelf, me tengo que ir
                             logueado = true;
-                            System.out.println("Bienvenido" + /*¿?*/);
-                        }
+                            System.out.println("Bienvenido" + *//*¿?*//*);
+                        }*/
                         break;
                     case "2":
                         break;
                     default:
                         System.out.println("Opción no válida");
-                        System.out.println("Pulse para continuar...");
+//                        System.out.println("Pulse para continuar..."); en el utils pulseParaContinuar ya viene un sout
                         Utils.pulseParaContinuar();
                         Utils.limpiaPantalla();
                         break;

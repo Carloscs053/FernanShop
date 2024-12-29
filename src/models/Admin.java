@@ -44,8 +44,7 @@ public class Admin {
 
     //Otros métodos
     public boolean loginAdmin(String nombre, String contrasena) {
-        if (this.nombre.equals(nombre) && this.contrasena.equals(contrasena)) return true;
-        return false;
+        return (this.nombre.equals(nombre) && this.contrasena.equals(contrasena)) ;//lo he simplificado ya que si no se cumple una de las dos da falso
     }
 
     public boolean altaTrabajador(Trabajador trabajador) {

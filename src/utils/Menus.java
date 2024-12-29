@@ -39,7 +39,7 @@ public class Menus {
     }
 
     // Menú para el administrador
-    public void menuAdmin(Admin admin) {
+    public static void menuAdmin(String nombre/*, Pedido pedido*/) {
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s. Tiene %d pedido por asignar.
@@ -51,7 +51,7 @@ public class Menus {
                 6.- Ver todos los trabajadores
                 7.- Cerrar sesión
                 \n
-                Seleccione una opcion:\s""", admin.getNombre());
+                Seleccione una opcion:\s""", nombre);
     }
 
     // Menú para actualizar el estado de un pedido
@@ -69,7 +69,7 @@ public class Menus {
     }
 
     // Mostrar el estado de un pedido
-    public void estadoPedido(Pedido pedido) {
+    /*public void estadoPedido(Pedido pedido) {
         System.out.printf("""
                 ===========  Pedido %d ===========
                 Estado: %s
@@ -84,7 +84,7 @@ public class Menus {
                 Detalle del pedido
                 \t%s
                 \t%s
-                Total pedido: %f""", pedido.getCodigo(), pedido.getEstado(), pedido.getCliente().getNombre(), pedido.getCliente().getApellido(), pedido.getCliente().getDireccion(), pedido.getCliente().getLocalidad(), pedido.getCliente().getTelefono(), pedido.getCliente().getEmail(), pedido.getFechaPedido(), pedido.calculateDays(), pedido.getComentario(), pedido.getP1(), pedido.getP2(), pedido.getTotal());
+                Total pedido: %f""", pedido.getCodigo(), pedido.getEstado(), Cliente. , pedido.getCliente().getApellido(), pedido.getCliente().getDireccion(), pedido.getCliente().getLocalidad(), pedido.getCliente().getTelefono(), pedido.getCliente().getEmail(), pedido.getFechaPedido(), pedido.calculateDays(), pedido.getComentario(), pedido.getP1(), pedido.getP2(), pedido.getTotal());
     }
 
     // Menú para mostrar los pedidos asignados a un trabajador
@@ -103,5 +103,5 @@ public class Menus {
                 1. %s - %d pedido en proceso
                 2. %s - %d pedidos en proceso
                 Seleccione el trabajador:\s""", pedido.getCodigo(), pedido.getTrabajador().getNombre(), pedido.getTrabajador().getContador(), pedido.getTrabajador().getNombre(), pedido.getTrabajador().getContador());
-    }
+    }*/
 }
