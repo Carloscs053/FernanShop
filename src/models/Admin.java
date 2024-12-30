@@ -11,8 +11,9 @@ public class Admin {
 
     //Constructor
     //Deberíamos preestableces las credenciales, el constructor probablemente vaya vacío
-    public Admin(String nombre, String contrasena) {
+    public Admin(String nombre, String email, String contrasena) {
         this.nombre = nombre;
+        this.email = email;
         this.contrasena = contrasena;
     }
 
@@ -44,7 +45,7 @@ public class Admin {
 
     //Otros métodos
     public boolean loginAdmin(String nombre, String contrasena) {
-        return (this.nombre.equals(nombre) && this.contrasena.equals(contrasena)) ;//lo he simplificado ya que si no se cumple una de las dos da falso
+        return ((this.nombre.equals(nombre) || this.email.equals(nombre)) && this.contrasena.equals(contrasena)) ;//lo he simplificado ya que si no se cumple una de las dos da falso
     }
 
     public boolean altaTrabajador(Trabajador trabajador) {

@@ -1,5 +1,7 @@
 package models;
 
+import data.TrabajadoresData;
+
 public class Tienda {
     //Es cierto el contralador es tienda y no el pedido.
 
@@ -7,17 +9,17 @@ public class Tienda {
     private Cliente cliente1;
     private Cliente cliente2;
     //Admin se encarga de gestionar los trabajadores, tienda gestiona los clientes
-    /*private Trabajador trabajador1;
+    private Trabajador trabajador1;
     private Trabajador trabajador2;
-    private Trabajador trabajador3;*/
+    private Trabajador trabajador3;
 
     //Constructor
     public Tienda() {
         this.cliente1 = null;
         this.cliente2 = null;
-        /*this.trabajador1 = null;
+        this.trabajador1 = null;
         this.trabajador2 = null;
-        this.trabajador3 = null;*/
+        this.trabajador3 = null;
     }
 
 
@@ -38,7 +40,7 @@ public class Tienda {
         this.cliente2 = cliente2;
     }
 
-   /* public Trabajador getTrabajador1() {
+    public Trabajador getTrabajador1() {
         return trabajador1;
     }
 
@@ -60,7 +62,7 @@ public class Tienda {
 
     public void setTrabajador3(Trabajador trabajador3) {
         this.trabajador3 = trabajador3;
-    }*/
+    }
 
 
     //Otros métodos
@@ -82,7 +84,17 @@ public class Tienda {
         return cliente2 != null && (nombre.equals(cliente2.getNombre()) && contrasenia.equals(cliente2.getContrasenia()));
     }
 
-
+    //login del trabajador
+    public boolean loginTrabajador(String email, String contrasena) {
+        if (TrabajadoresData.trabajador1.getEmail().equals(email) && TrabajadoresData.trabajador1.getContrasena().equals(contrasena)) {
+            return true;
+        } else if (TrabajadoresData.trabajador2.getEmail().equals(email) && TrabajadoresData.trabajador2.getContrasena().equals(contrasena)) {
+            return true;
+        } else if (TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getContrasena().equals(contrasena)) {
+            return true;
+        }
+        return false;
+    }
 
     //toString
     @Override
@@ -95,4 +107,7 @@ public class Tienda {
                 ", trabajador3=" + trabajador3 +*/
                 '}';
     }
+
+
+    
 }
