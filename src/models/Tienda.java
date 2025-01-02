@@ -7,9 +7,9 @@ public class Tienda {
     //Es cierto el contralador es tienda y no el pedido.
 
     //Atributos
+    private Admin admin;
     private Cliente cliente1;
     private Cliente cliente2;
-    //Admin se encarga de gestionar los trabajadores, tienda gestiona los clientes
     private Trabajador trabajador1;
     private Trabajador trabajador2;
     private Trabajador trabajador3;
@@ -22,6 +22,7 @@ public class Tienda {
         this.trabajador1 = null;
         this.trabajador2 = null;
         this.trabajador3 = null;
+        this.admin = null;
     }
     
 
@@ -80,19 +81,31 @@ public class Tienda {
         return false;
     }
 
+    public Admin loginAdmin(String email, String contrasenia) {
+        if (admin != null && admin.loginAdmin(email, contrasenia)) return admin;
+        return null;
+    }
+
     //En vez de poner en el login el nombre podria el email o un username o incluso que ambas opciones sean validad username y email
-    public boolean loginCliente(String nombre, String contrasenia) {
-        if (cliente1 != null && (nombre.equals(cliente1.getNombre()) && contrasenia.equals(cliente1.getContrasenia()))) return true;
-        return cliente2 != null && (nombre.equals(cliente2.getNombre()) && contrasenia.equals(cliente2.getContrasenia()));
+    public Cliente loginCliente(String nombre, String contrasenia) {
+        /*if (cliente1 != null && (nombre.equals(cliente1.getNombre()) && contrasenia.equals(cliente1.getContrasenia()))) return true;
+        return cliente2 != null && (nombre.equals(cliente2.getNombre()) && contrasenia.equals(cliente2.getContrasenia()));*/
+        if (cliente1 != null && cliente1.loginCliente(nombre, contrasenia)) return cliente1;
+        if (cliente2 != null && cliente2.loginCliente(nombre, contrasenia)) return cliente2;
+        return null;
     }
 
     //login del trabajador
-    public boolean loginTrabajador(String email, String contrasena) {
-        if (TrabajadoresData.trabajador1.getEmail().equals(email) && TrabajadoresData.trabajador1.getContrasena().equals(contrasena)) {
+    public Trabajador loginTrabajador(String email, String contrasena) {
+       /* if (TrabajadoresData.trabajador1.getEmail().equals(email) && TrabajadoresData.trabajador1.getContrasena().equals(contrasena)) {
             return true;
         } else if (TrabajadoresData.trabajador2.getEmail().equals(email) && TrabajadoresData.trabajador2.getContrasena().equals(contrasena)) {
             return true;
-        } else return TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getContrasena().equals(contrasena);
+        } else return TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getContrasena().equals(contrasena);*/
+        if (trabajador1 != null && trabajador1.loginTrabajador(email, contrasena)) return trabajador1;
+        if (trabajador2 != null && trabajador2.loginTrabajador(email, contrasena)) return trabajador2;
+        if (trabajador3 != null && trabajador3.loginTrabajador(email, contrasena)) return trabajador3;
+        return null;
     }
 
     public static Trabajador getTrabajadorByEmail(String email) {

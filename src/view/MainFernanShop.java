@@ -45,11 +45,15 @@ public class MainFernanShop {
 
             switch (op) {
                 case "1":
+                    //Reiniciamos el logueado para que al volver a este punto no entre en el perfil anterior
+                    logueado = false;
                     // Solicitar nombre y contraseña para iniciar sesión
                     System.out.print("Nombre: ");
                     String nombre = s.nextLine();
                     System.out.print("Contraseña: ");
                     String contrasenia = s.nextLine();
+                    Cliente tempCliente = tienda.loginCliente(nombre, contrasenia);
+                    Trabajador tempTrabajador = tienda.loginTrabajador(nombre, contrasenia);
 
                     // Verificar si las credenciales son de un administrador
                     if (admin.loginAdmin(nombre, contrasenia)) {
@@ -57,13 +61,18 @@ public class MainFernanShop {
                         // Mostrar el menú del administrador
                         Utils.limpiaPantalla();
                         Menus.menuAdmin(admin);
-                    } else if (tienda.loginTrabajador(nombre, contrasenia)) {
+                    } else if (/*tienda.loginTrabajador(nombre, contrasenia)*/ tempTrabajador != null) {
                         // Verificar si las credenciales son de un trabajador
                         logueado = true;
-                        Trabajador trabajador = Tienda.getTrabajadorByEmail(nombre);
+                        //TODO creo que no hace falta, el login ya devuelve el trabajador
+                        //Trabajador trabajador = Tienda.getTrabajadorByEmail(nombre);
                         // Mostrar el menú del trabajador
                         Utils.limpiaPantalla();
-                        Menus.menuTrabajador(trabajador, productosData, tienda);
+                        Menus.menuTrabajador(/*trabajador*/ tempTrabajador, productosData, tienda);
+                    } else if (tempCliente != null){
+                        logueado = true;
+                        Utils.limpiaPantalla();
+                        Menus.menuCliente(tempCliente);
                     } else {
                         // Mostrar mensaje de error si las credenciales son incorrectas
                         System.out.println("Usuario o contraseña incorrectos");

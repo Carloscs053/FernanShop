@@ -11,6 +11,7 @@ public class Cliente {
     private String contrasenia;
     private Pedido pedido1;
     private Pedido pedido2;
+    private int cuentaPedido;
 
     //Constructor
 
@@ -25,6 +26,7 @@ public class Cliente {
         this.contrasenia = contrasenia;
         pedido1 = null;
         pedido2 = null;
+        cuentaPedido = 0;
     }
 
     //Constructor copia
@@ -125,7 +127,30 @@ public class Cliente {
     }
 
     //Otros métodos
+    //Dice si el login es correcto o no
+    public boolean loginCliente(String nombre, String contrasenia) {
+        return this.nombre.equals(nombre) && this.contrasenia.equals(contrasenia);
+    }
 
+    //Cuenta los pedidos que tiene el cliente
+    public void cuentaPedido() {
+        cuentaPedido = 0;
+        if (pedido1 != null) cuentaPedido++;
+        if (pedido2 != null) cuentaPedido++;
+    }
+
+
+
+    public String verCliente() {
+        String salida = "==========================\n";
+        salida += "PERFIL DEL CLIENTE\n";
+        salida += "==========================\n";
+        salida += "Nombre: " + nombre + apellido + "\n";
+        salida += "Email: " + email + "\n";
+        salida += "Teléfono: " + email + "\n";
+        salida += "==========================\n";
+        return salida;
+    }
 
 
     //toString
