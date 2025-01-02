@@ -69,9 +69,22 @@ public class Producto {
             stock += cantidad;
             return true;
         }
-
+        //pintar un producto
         public String pintaProducto() {
-            return "\t" + nombre + String.format("\n\t%.2f", precio) + " Euros";
+            return nombre + String.format("\n%.2f", precio) + " Euros\n";
+        }
+
+        //Modificar un producto
+        public void modificarProducto(String nuevoNombre, Double nuevoPrecio, Integer nuevoStock) {
+            if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
+                this.nombre = nuevoNombre;
+            }
+            if (nuevoPrecio != null) {
+                this.precio = nuevoPrecio;
+            }
+            if (nuevoStock != null) {
+                this.stock = nuevoStock;
+            }
         }
 
         //toString
@@ -82,5 +95,10 @@ public class Producto {
                     ", stock =" + stock +
                     ", precio =" + precio +
                     '}';
+        }
+
+        public int getCantidad() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'getCantidad'");
         }
 }

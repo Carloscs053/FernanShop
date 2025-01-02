@@ -1,7 +1,7 @@
 package models;
 
 import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 public class Pedido {
 
@@ -16,25 +16,24 @@ public class Pedido {
     private int diasRetraso;
     //TODO Bajo revisión
     //un pepdido lo gestiona un trabajador y un pedido lo realiza un cliente cliente
-    /*private Trabajador trabajador;
-    private Cliente cliente;*/
+    private Trabajador trabajador;
+    private Cliente cliente;
 
     //Atributo Estático
     public static final int SHIPPING_DAYS = 5;
 
     //Constructor
     //Trabajador y cliente quitados de parámetros para que no salten fallos, temporal
-    public Pedido(Producto p1, Producto p2, Producto p3, /*String comentario, String estado,*/ int diasRetraso) {
+    public Pedido(Producto p1, Producto p2, Producto p3, String comentario, String estado, int diasRetraso, Cliente cliente) {
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
         this.comentario = "";
-        this.estado = "En proceso";
+        this.estado = "Recibido";
         this.diasRetraso = diasRetraso;
-        /*this.trabajador = trabajador;
-        this.cliente = cliente;*/
+        this.cliente = cliente;
         this.fechaPedido = LocalDate.now();
-        //this.codigo = generarCodigoAleatorio();
+        this.codigo = generarCodigoAleatorio();
     }
 
     //Getters y Setters
@@ -102,7 +101,7 @@ public class Pedido {
         this.diasRetraso = diasRetraso;
     }
 
-    /*public Trabajador getTrabajador() {
+    public Trabajador getTrabajador() {
         return trabajador;
     }
 
@@ -116,7 +115,7 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }*/
+    }
 
     //Otros métodos
 
@@ -160,26 +159,26 @@ public class Pedido {
     }
 
     // Generar un código aleatorio utilizando números del 0 al 9, la fecha de pedido y las iniciales del cliente
-    /*public String generarCodigoAleatorio() {
-        String fecha = fechaPedido.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String iniciales = cliente.getNombre().substring(0, 1) + cliente.getApellido().substring(0, 1);
-        int numeroAleatorio = (int) (Math.random() * 10000); // Generar un número aleatorio de 4 dígitos
-        return this.codigo = iniciales + fecha + String.format("%04d", numeroAleatorio);
-    }*/
+    public String generarCodigoAleatorio() {
+        return this.codigo = "hola";
+    }
+
+    // Método para obtener la cantidad total de productos
+    public int getCantidadTotalProductos() {
+        return p1.getCantidad() + p2.getCantidad() + p3.getCantidad();
+    }
 
     // Representar el pedido como una cadena de texto
-    /*@Override
+    @Override
     public String toString() {
-        return "Pedido{" +
-                "p1=" + p1 +
-                ", p2=" + p2 +
-                ", p3=" + p3 +
-                ", codigo='" + codigo + '\'' +
-                ", fecha Pedido=" + fechaPedido +
-                ", comentario='" + comentario + '\'' +
-                ", estado='" + estado + '\'' +
-                ", trabajador=" + trabajador +
-                ", cliente=" + cliente +
-                '}';
-    }*/
+        return String.format("Pedido %s: %s %s, %d productos, Total: %.2f, Comentario: %s, Estado: %s, Fecha: %s",
+                codigo,
+                cliente.getNombre(),
+                cliente.getApellido(),
+                getCantidadTotalProductos(),
+                getTotal(),
+                comentario,
+                estado,
+                fechaPedido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    }
 }

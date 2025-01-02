@@ -70,7 +70,7 @@ public class Utils {
         return tieneMayuscula && tieneNumero;
     }
 
-    // Método para validar un correo de trabajador que debe tener el dominio "@fernanshop.com"
+    // Metodo para validar un correo de trabajador que debe tener el dominio "@fernanshop.com"
     public static boolean validaCorreoTrabajador(String correo) {
         if (correo == null || correo.isEmpty()) {
             return false;

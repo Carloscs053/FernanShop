@@ -1,5 +1,6 @@
 package models;
 
+import data.ProductosData;
 import data.TrabajadoresData;
 
 public class Tienda {
@@ -13,6 +14,7 @@ public class Tienda {
     private Trabajador trabajador2;
     private Trabajador trabajador3;
 
+
     //Constructor
     public Tienda() {
         this.cliente1 = null;
@@ -21,7 +23,7 @@ public class Tienda {
         this.trabajador2 = null;
         this.trabajador3 = null;
     }
-
+    
 
     //Getters y Setters
     public Cliente getCliente1() {
@@ -90,10 +92,46 @@ public class Tienda {
             return true;
         } else if (TrabajadoresData.trabajador2.getEmail().equals(email) && TrabajadoresData.trabajador2.getContrasena().equals(contrasena)) {
             return true;
-        } else if (TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getContrasena().equals(contrasena)) {
+        } else return TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getContrasena().equals(contrasena);
+    }
+
+    public static Trabajador getTrabajadorByEmail(String email) {
+        if (TrabajadoresData.trabajador1.getEmail().equals(email)) {
+            return TrabajadoresData.trabajador1;
+        } else if (TrabajadoresData.trabajador2.getEmail().equals(email)) {
+            return TrabajadoresData.trabajador2;
+        } else if (TrabajadoresData.trabajador3.getEmail().equals(email)) {
+            return TrabajadoresData.trabajador3;
+        } else {
+            return null;
+        }
+    }
+
+    // Método para generar el catálogo de productos
+    public String verCatalogo(ProductosData productosData) {
+        String catalogo = "";
+        catalogo += ((ProductosData.Producto1 != null) ? ProductosData.Producto1.pintaProducto() : "") + "\n";
+        catalogo += ((ProductosData.Producto2 != null) ? ProductosData.Producto2.pintaProducto() : "") + "\n";
+        catalogo += ((ProductosData.Producto3 != null) ? ProductosData.Producto3.pintaProducto() : "") + "\n";
+        catalogo += ((ProductosData.Producto4 != null) ? ProductosData.Producto4.pintaProducto() : "") + "\n";
+        catalogo += ((ProductosData.Producto5 != null) ? ProductosData.Producto5.pintaProducto() : "") + "\n";
+        return catalogo;
+    }
+
+    public boolean existeCodigoProducto(String codigo, ProductosData productosData) {
+        if (ProductosData.Producto1 != null && ProductosData.Producto1.getCodigo().equalsIgnoreCase(codigo)) {
             return true;
         }
-        return false;
+        if (ProductosData.Producto2 != null && ProductosData.Producto2.getCodigo().equalsIgnoreCase(codigo)) {
+            return true;
+        }
+        if (ProductosData.Producto3 != null && ProductosData.Producto3.getCodigo().equalsIgnoreCase(codigo)) {
+            return true;
+        }
+        if (ProductosData.Producto4 != null && ProductosData.Producto4.getCodigo().equalsIgnoreCase(codigo)) {
+            return true;
+        }
+        return ProductosData.Producto5 != null && ProductosData.Producto5.getCodigo().equalsIgnoreCase(codigo);
     }
 
     //toString
@@ -107,7 +145,4 @@ public class Tienda {
                 ", trabajador3=" + trabajador3 +*/
                 '}';
     }
-
-
-    
 }
