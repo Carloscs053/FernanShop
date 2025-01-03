@@ -57,48 +57,50 @@ public class Producto {
         this.precio = precio;
     }
 
-        //Otros métodos
-        public boolean reducirStock(int cantidad) {
-            if (cantidad < 0 || cantidad > stock) return false;
-            stock -= cantidad;
-            return true;
-        }
+    //Otros métodos
+    public boolean reducirStock(int cantidad) {
+        if (cantidad < 0 || cantidad > stock) return false;
+        stock -= cantidad;
+        return true;
+    }
 
-        public boolean aumentarStock(int cantidad) {
-            if (cantidad < 0) return false;
-            stock += cantidad;
-            return true;
-        }
-        //pintar un producto
-        public String pintaProducto() {
-            return nombre + String.format("\n%.2f", precio) + " Euros\n";
-        }
+    public boolean aumentarStock(int cantidad) {
+        if (cantidad < 0) return false;
+        stock += cantidad;
+        return true;
+    }
 
-        //Modificar un producto
-        public void modificarProducto(String nuevoNombre, Double nuevoPrecio, Integer nuevoStock) {
-            if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
-                this.nombre = nuevoNombre;
-            }
-            if (nuevoPrecio != null) {
-                this.precio = nuevoPrecio;
-            }
-            if (nuevoStock != null) {
-                this.stock = nuevoStock;
-            }
-        }
+    //pintar un producto
+    public String pintaProducto() {
+        return nombre + String.format("\n%.2f", precio) + " Euros\n";
+    }
 
-        //toString
-        @Override
-        public String toString() {
-            return "Producto{" +
-                    "nombre ='" + nombre + '\'' +
-                    ", stock =" + stock +
-                    ", precio =" + precio +
-                    '}';
+    //Modificar un producto
+    public void modificarProducto(String nuevoNombre, Double nuevoPrecio, Integer nuevoStock) {
+        if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
+            this.nombre = nuevoNombre;
         }
+        if (nuevoPrecio != null) {
+            this.precio = nuevoPrecio;
+        }
+        if (nuevoStock != null) {
+            this.stock = nuevoStock;
+        }
+    }
 
-        public int getCantidad() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'getCantidad'");
-        }
+    //toString
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre ='" + nombre + '\'' +
+                ", stock =" + stock +
+                ", precio =" + precio +
+                '}';
+    }
+
+    //TODO Cantidad de qué? Es el stock?
+    public int getCantidad() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCantidad'");
+    }
 }

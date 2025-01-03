@@ -5,7 +5,7 @@ public class Trabajador {
     //Atributos
     private String nombre;
     private String email;
-    private String contrasena;
+    private String clave;
     private int telefono;
     private Pedido p1;
     private Pedido p2;
@@ -16,10 +16,10 @@ public class Trabajador {
     //No los veo bien en el UML, cosa que deberíamos desarrollar más en profundidad antes de continuar (creo)
 
     //Constructor
-    public Trabajador(String nombre, String email, String contrasena, int telefono) {
+    public Trabajador(String nombre, String email, String clave, int telefono) {
         this.nombre = nombre;
         this.email = email;
-        this.contrasena = contrasena;
+        this.clave = clave;
         this.telefono = telefono;
         this.p1 = null;
         this.p2 = null;
@@ -43,12 +43,12 @@ public class Trabajador {
         this.email = email;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getClave() {
+        return clave;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public int getTelefono() {
@@ -93,8 +93,8 @@ public class Trabajador {
     }
 
     //Login para trabajadores con email y contraseña
-    public boolean loginTrabajador(String email, String contrasena) {
-        return this.email.equals(email) && this.contrasena.equals(contrasena);
+    public boolean loginTrabajador(String email, String clave) {
+        return this.email.equals(email) && this.clave.equals(clave);
     }
 
     // Método para verificar si el trabajador tiene pedidos asignados
@@ -111,12 +111,12 @@ public class Trabajador {
         return resultado;
     }
 
-    public void modificarDatos(String nuevoNombre, String nuevaContrasena) {
+    public void modificarDatos(String nuevoNombre, String nuevaClave) {
         if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
             this.nombre = nuevoNombre;
         }
-        if (nuevaContrasena != null && !nuevaContrasena.isEmpty()) {
-            this.contrasena = nuevaContrasena;
+        if (nuevaClave != null && !nuevaClave.isEmpty()) {
+            this.clave = nuevaClave;
         }
     }
 

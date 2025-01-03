@@ -7,6 +7,7 @@ import models.*;
 import utils.Menus;
 import utils.Utils;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class MainFernanShop {
@@ -16,15 +17,19 @@ public class MainFernanShop {
         boolean logueado = false;
         ProductosData productosData = new ProductosData();
         Tienda tienda = new Tienda();
+        //Creo que en el main solo se invoca a tienda, que es el controlador y maneja los users
         Cliente cliente1 = ClientesData.cliente1;
         Cliente cliente2 = ClientesData.cliente2;
         Trabajador trabajador1 = TrabajadoresData.trabajador1;
         Trabajador trabajador2 = TrabajadoresData.trabajador2;
         Trabajador trabajador3 = TrabajadoresData.trabajador3;
+        //Creo que esto se crea en el controlador, al igual que todos los users
         Admin admin = new Admin("admin", "admin@fernanshop.com", "1234");
         Pedido pedido1 = new Pedido(ProductosData.Producto1, ProductosData.Producto2, ProductosData.Producto3, "Comentario del pedido", "Recibido", 0, cliente1);
         trabajador2.setP1(pedido1);
         trabajador2.cuentaPedidos();
+
+        tienda.mock();
 
         System.out.println("""
                 ███████╗███████╗██████╗ ███╗   ██╗ █████╗ ███╗   ██╗███████╗██╗  ██╗ ██████╗ ██████╗
@@ -33,7 +38,7 @@ public class MainFernanShop {
                 ██╔══╝  ██╔══╝  ██╔══██╗██║╚██╗██║██╔══██║██║╚██╗██║╚════██║██╔══██║██║   ██║██╔═══╝
                 ██║     ███████╗██║  ██║██║ ╚████║██║  ██║██║ ╚████║███████║██║  ██║╚██████╔╝██║
                 ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝
-                
+                                
                 """);
         while (true) {
             // Solicitar al usuario que seleccione una opción
@@ -48,36 +53,40 @@ public class MainFernanShop {
                     //Reiniciamos el logueado para que al volver a este punto no entre en el perfil anterior
                     logueado = false;
                     // Solicitar nombre y contraseña para iniciar sesión
-                    System.out.print("Nombre: ");
-                    String nombre = s.nextLine();
+                    System.out.print("Email: ");
+                    String email = s.nextLine();
                     System.out.print("Contraseña: ");
-                    String contrasenia = s.nextLine();
-                    Cliente tempCliente = tienda.loginCliente(nombre, contrasenia);
-                    Trabajador tempTrabajador = tienda.loginTrabajador(nombre, contrasenia);
+                    String clave = s.nextLine();
+                    //Cliente tempCliente = tienda.loginCliente(email, clave);
+                    //Trabajador tempTrabajador = tienda.loginTrabajador(email, clave);
 
-                    // Verificar si las credenciales son de un administrador
-                    if (admin.loginAdmin(nombre, contrasenia)) {
+                    //Comprueba si es el admin
+                    if (admin.loginAdmin(email, clave)) {
                         logueado = true;
-                        // Mostrar el menú del administrador
                         Utils.limpiaPantalla();
+                        //Esto va dentro de un do-while y con un switch
                         Menus.menuAdmin(admin);
-                    } else if (/*tienda.loginTrabajador(nombre, contrasenia)*/ tempTrabajador != null) {
-                        // Verificar si las credenciales son de un trabajador
-                        logueado = true;
-                        //TODO creo que no hace falta, el login ya devuelve el trabajador
-                        //Trabajador trabajador = Tienda.getTrabajadorByEmail(nombre);
-                        // Mostrar el menú del trabajador
-                        Utils.limpiaPantalla();
-                        Menus.menuTrabajador(/*trabajador*/ tempTrabajador, productosData, tienda);
-                    } else if (tempCliente != null){
-                        logueado = true;
-                        Utils.limpiaPantalla();
-                        Menus.menuCliente(tempCliente);
                     } else {
-                        // Mostrar mensaje de error si las credenciales son incorrectas
-                        System.out.println("Usuario o contraseña incorrectos");
-                        Utils.pulseParaContinuar();
-                        Utils.limpiaPantalla();
+                        //Si no, comprueba si es un trabajador
+                        Trabajador tempTrabajador = tienda.loginTrabajador(email, clave);
+                        if (tempTrabajador != null) {
+                            logueado = true;
+                            Utils.limpiaPantalla();
+                            //Do-while (preguntar por las variables
+                            Menus.menuTrabajador(tempTrabajador, productosData, tienda);
+                        } else {
+                            //Si no lo es, comprueba si es un cliente
+                            Cliente tempCliente = tienda.loginCliente(email, clave);
+                            if (tempCliente != null) {
+                                logueado = true;
+                                Utils.limpiaPantalla();
+                                //Do-while
+                                Menus.menuCliente(tempCliente);
+                            } else {
+                                //Si no es nada de lo anterior, las credenciales no son correctas
+                                System.out.println("Email y/o contraseña incorrectas");
+                            }
+                        }
                     }
                     break;
 

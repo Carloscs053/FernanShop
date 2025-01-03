@@ -4,17 +4,17 @@ public class Admin {
     //Atributos
     private String nombre;
     private String email;
-    private String contrasena;
+    private String clave;
     private Trabajador trabajador1;
     private Trabajador trabajador2;
     private Trabajador trabajador3;
 
     //Constructor
     //Deberíamos preestableces las credenciales, el constructor probablemente vaya vacío
-    public Admin(String nombre, String email, String contrasena) {
+    public Admin(String nombre, String email, String clave) {
         this.nombre = nombre;
         this.email = email;
-        this.contrasena = contrasena;
+        this.clave = clave;
     }
 
     //Getters y Setters
@@ -34,19 +34,19 @@ public class Admin {
         this.email = email;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getClave() {
+        return clave;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
 
     //Otros métodos
-    public boolean loginAdmin(String email, String contrasena) {
+    public boolean loginAdmin(String email, String clave) {
         //lo he simplificado ya que si no se cumple una de las dos da falso
-        return ((/*this.nombre.equals(nombre) || */this.email.equals(email)) && this.contrasena.equals(contrasena)) ;
+        return ((/*this.nombre.equals(nombre) || */this.email.equals(email)) && this.clave.equals(clave)) ;
     }
 
     public boolean altaTrabajador(Trabajador trabajador) {
@@ -68,6 +68,6 @@ public class Admin {
     //toString
     @Override
     public String toString() {
-        return "Admin{" + "nombre=" + nombre + ", contrasena=" + contrasena + ", email= " + email + '}';
+        return "Admin{" + "nombre=" + nombre + ", clave=" + clave + ", email= " + email + '}';
     }
 }

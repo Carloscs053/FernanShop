@@ -1,7 +1,10 @@
 package models;
 
+import data.ClientesData;
 import data.ProductosData;
 import data.TrabajadoresData;
+
+import static data.TrabajadoresData.*;
 
 public class Tienda {
     //Es cierto el contralador es tienda y no el pedido.
@@ -24,7 +27,7 @@ public class Tienda {
         this.trabajador3 = null;
         this.admin = null;
     }
-    
+
 
     //Getters y Setters
     public Cliente getCliente1() {
@@ -69,6 +72,17 @@ public class Tienda {
 
 
     //Otros métodos
+    //MOCK de prueba
+    public void mock() {
+        admin = new Admin("admin", "admin@fernanshop.com", "1234");
+        this.cliente1 = ClientesData.cliente1;
+        this.cliente2 = ClientesData.cliente2;
+        trabajador1 = TrabajadoresData.trabajador1;
+        trabajador2 = TrabajadoresData.trabajador2;
+        trabajador3 = TrabajadoresData.trabajador3;
+    }
+
+
     public boolean altaCliente(Cliente cliente) {
         if (cliente1 == null) {
             this.cliente1 = cliente;
@@ -81,30 +95,32 @@ public class Tienda {
         return false;
     }
 
-    public Admin loginAdmin(String email, String contrasenia) {
-        if (admin != null && admin.loginAdmin(email, contrasenia)) return admin;
+    //Admin es un solo usuario y lo llamamos desde admin, nos hace verdaderamente falta este logueo??
+    public Admin loginAdmin(String email, String clave) {
+        //if (admin != null && admin.loginAdmin(email, clave)) return admin;
+        if (admin != null && admin.loginAdmin(email, clave)) return admin;
         return null;
     }
 
-    //En vez de poner en el login el nombre podria el email o un username o incluso que ambas opciones sean validad username y email
-    public Cliente loginCliente(String nombre, String contrasenia) {
-        /*if (cliente1 != null && (nombre.equals(cliente1.getNombre()) && contrasenia.equals(cliente1.getContrasenia()))) return true;
-        return cliente2 != null && (nombre.equals(cliente2.getNombre()) && contrasenia.equals(cliente2.getContrasenia()));*/
-        if (cliente1 != null && cliente1.loginCliente(nombre, contrasenia)) return cliente1;
-        if (cliente2 != null && cliente2.loginCliente(nombre, contrasenia)) return cliente2;
+    //En vez de poner en el login el nombre pondría el email o un username o incluso que ambas opciones sean validad username y email
+    public Cliente loginCliente(String email, String clave) {
+        /*if (cliente1 != null && (nombre.equals(cliente1.getNombre()) && contrasenia.equals(cliente1.getClave()))) return true;
+        return cliente2 != null && (nombre.equals(cliente2.getNombre()) && contrasenia.equals(cliente2.getClave()));*/
+        if (cliente1 != null && cliente1.loginCliente(email, clave)) return cliente1;
+        if (cliente2 != null && cliente2.loginCliente(email, clave)) return cliente2;
         return null;
     }
 
     //login del trabajador
-    public Trabajador loginTrabajador(String email, String contrasena) {
-       /* if (TrabajadoresData.trabajador1.getEmail().equals(email) && TrabajadoresData.trabajador1.getContrasena().equals(contrasena)) {
+    public Trabajador loginTrabajador(String email, String clave) {
+       /* if (TrabajadoresData.trabajador1.getEmail().equals(email) && TrabajadoresData.trabajador1.getClave().equals(contrasena)) {
             return true;
-        } else if (TrabajadoresData.trabajador2.getEmail().equals(email) && TrabajadoresData.trabajador2.getContrasena().equals(contrasena)) {
+        } else if (TrabajadoresData.trabajador2.getEmail().equals(email) && TrabajadoresData.trabajador2.getClave().equals(contrasena)) {
             return true;
-        } else return TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getContrasena().equals(contrasena);*/
-        if (trabajador1 != null && trabajador1.loginTrabajador(email, contrasena)) return trabajador1;
-        if (trabajador2 != null && trabajador2.loginTrabajador(email, contrasena)) return trabajador2;
-        if (trabajador3 != null && trabajador3.loginTrabajador(email, contrasena)) return trabajador3;
+        } else return TrabajadoresData.trabajador3.getEmail().equals(email) && TrabajadoresData.trabajador3.getClave().equals(contrasena);*/
+        if (trabajador1 != null && trabajador1.loginTrabajador(email, clave)) return trabajador1;
+        if (trabajador2 != null && trabajador2.loginTrabajador(email, clave)) return trabajador2;
+        if (trabajador3 != null && trabajador3.loginTrabajador(email, clave)) return trabajador3;
         return null;
     }
 

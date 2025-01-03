@@ -8,14 +8,14 @@ public class Cliente {
     private String provincia;
     private int telefono;
     private String email;
-    private String contrasenia;
+    private String clave;
     private Pedido pedido1;
     private Pedido pedido2;
     private int cuentaPedido;
 
     //Constructor
 
-    public Cliente(String nombre, String apellido, String direccion, String localidad, String provincia, int telefono, String email, String contrasenia) {
+    public Cliente(String nombre, String apellido, String direccion, String localidad, String provincia, int telefono, String email, String clave) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
@@ -23,7 +23,7 @@ public class Cliente {
         this.provincia = provincia;
         this.telefono = telefono;
         this.email = email;
-        this.contrasenia = contrasenia;
+        this.clave = clave;
         pedido1 = null;
         pedido2 = null;
         cuentaPedido = 0;
@@ -39,7 +39,7 @@ public class Cliente {
         provincia = cliente.provincia;
         telefono = cliente.telefono;
         email = cliente.email;
-        contrasenia = cliente.contrasenia;
+        clave = cliente.clave;
         pedido1 = cliente.pedido1;
         pedido2 = cliente.pedido2;
     }
@@ -102,12 +102,12 @@ public class Cliente {
         this.email = email;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getClave() {
+        return clave;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public void setPedido1(Pedido pedido1) {
@@ -128,8 +128,8 @@ public class Cliente {
 
     //Otros métodos
     //Dice si el login es correcto o no
-    public boolean loginCliente(String nombre, String contrasenia) {
-        return this.nombre.equals(nombre) && this.contrasenia.equals(contrasenia);
+    public boolean loginCliente(String email, String clave) {
+        return this.email.equals(email) && this.clave.equals(clave);
     }
 
     //Cuenta los pedidos que tiene el cliente
