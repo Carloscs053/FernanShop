@@ -147,6 +147,10 @@ public class Tienda {
         return catalogo;
     }
 
+    //metodo para comprobar si existe un pedido con un codigo determinado
+    
+
+    // Método para comprobar si existe un producto con un código determinado
     public boolean existeCodigoProducto(String codigo, ProductosData productosData) {
         if (ProductosData.Producto1 != null && ProductosData.Producto1.getCodigo().equalsIgnoreCase(codigo)) {
             return true;

@@ -26,7 +26,9 @@ public class MainFernanShop {
         //Creo que esto se crea en el controlador, al igual que todos los users
         Admin admin = new Admin("admin", "admin@fernanshop.com", "1234");
         Pedido pedido1 = new Pedido(ProductosData.Producto1, ProductosData.Producto2, ProductosData.Producto3, "Comentario del pedido", "Recibido", 0, cliente1);
+        Pedido pedido2 = new Pedido(ProductosData.Producto4, ProductosData.Producto3, "", "Recibido", 0, cliente1);
         trabajador2.setP1(pedido1);
+        trabajador2.setP2(pedido2);
         trabajador2.cuentaPedidos();
 
         tienda.mock();

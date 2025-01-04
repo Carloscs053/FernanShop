@@ -57,6 +57,8 @@ public class Menus {
     public static void menuTrabajador(Trabajador trabajador, ProductosData productosData, Tienda tienda) {
         var s = new Scanner(System.in);
         String opTrabajador;
+        Utils.cargandoPantalla();
+        Utils.limpiaPantalla();
         do {
             // Mostrar el menú del trabajador
             System.out.printf("""
@@ -123,6 +125,16 @@ public class Menus {
                     Utils.limpiaPantalla();
             }
         } while (!opTrabajador.equals("7"));
+    }
+
+    private static Pedido obtenerPedidoPorCodigo(Trabajador trabajador, String codigo) {
+        if (trabajador.getP1() != null && trabajador.getP1().getCodigo().equalsIgnoreCase(codigo)) {
+            return trabajador.getP1();
+        }
+        if (trabajador.getP2() != null && trabajador.getP2().getCodigo().equalsIgnoreCase(codigo)) {
+            return trabajador.getP2();
+        }
+        return null;
     }
 
     // Menú para actualizar el estado de un pedido
@@ -201,21 +213,58 @@ public class Menus {
                     // Opción no válida
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
+                cambiarFechaEntrega(pedido);
+                aniadirComentario(pedido);
             break;
         }
     }
 
-    // Obtener un pedido por su código
-    private static Pedido obtenerPedidoPorCodigo(Trabajador trabajador, String codigo) {
-        if (trabajador.getP1() != null && trabajador.getP1().getCodigo().equals(codigo)) {
-            return trabajador.getP1();
-        }
-        if (trabajador.getP2() != null && trabajador.getP2().getCodigo().equals(codigo)) {
-            return trabajador.getP2();
-        }
-        // Añadir más comprobaciones si hay más pedidos
+    public static void cambiarFechaEntrega(Pedido pedido) {
+        Scanner s = new Scanner(System.in);
+        System.out.print("¿Desea cambiar la fecha de entrega del pedido? (S/N):");
+        String respuesta = s.nextLine().trim().toUpperCase();
 
-        return null;
+        if (respuesta.equals("S")) {
+            System.out.print("Ingrese la cantidad de días de retraso:");
+            String diaRetraso = s.nextLine();
+
+            // Validar que el valor introducido sea un dígito
+            if (esDigito(diaRetraso)) {
+                int diasRetraso = Integer.parseInt(diaRetraso);
+                pedido.setDiasRetraso(diasRetraso);
+                System.out.print("La fecha de entrega del pedido ha sido actualizada con " + diasRetraso + " días de retraso.");
+            } else {
+                System.out.print("Valor no válido. Debe ingresar un número.");
+            }
+        } else {
+            System.out.print("No se ha cambiado la fecha de entrega del pedido.");
+        }
+    }
+
+    // Método auxiliar para verificar si una cadena contiene solo dígitos
+    private static boolean esDigito(String diaRetraso){
+        for (int i = 0; i < diaRetraso.length(); i++) {
+            char c = diaRetraso.charAt(i);
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void aniadirComentario(Pedido pedido) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("¿Desea añadir un comentario al pedido? (S/N):");
+        String respuesta = s.nextLine();
+
+        if (respuesta.equalsIgnoreCase("S")) {
+            System.out.println("Ingrese el comentario:");
+            String comentario = s.nextLine().toLowerCase();
+            pedido.setComentario(comentario);
+            System.out.println("Comentario añadido correctamente.");
+        } else {
+            System.out.println("No se ha añadido ningún comentario al pedido.");
+        }
     }
 
     // Consultar los pedidos asignados al trabajador
@@ -223,34 +272,40 @@ public class Menus {
         System.out.println("==== Pedidos asignados al trabajador ====");
         if (trabajador.getP1() != null) {
             System.out.printf("""  
-                    1. %s - %s %s (%s) - %s %s %s - %.2f
-                    """,
+                            1. %s - %s %s (%s) - %s  - %.2f
+                            """,
                     trabajador.getP1().getCodigo(),
                     trabajador.getP1().getCliente().getNombre(),
                     trabajador.getP1().getCliente().getApellido(),
                     trabajador.getP1().getCliente().getProvincia(),
-                    (trabajador.getP1().getP1() != null) ? trabajador.getP1().getP1().getNombre(): "",
-                    (trabajador.getP1().getP2() != null) ? ", " + trabajador.getP1().getP2().getNombre(): "",
-                    (trabajador.getP1().getP3() != null) ? ", " + trabajador.getP1().getP3().getNombre(): "",
+                    (trabajador.getP1().getCantidadProductos() < 2) ?
+                            trabajador.getP1().getCantidadProductos() + " Producto"
+                            : trabajador.getP1().getCantidadProductos() + " Productos",
                     trabajador.getP1().getTotal());
         } else {
             System.out.println("No hay pedido 1 asignado.");
         }
         if (trabajador.getP2() != null) {
             System.out.printf("""
-                    2. %s - %s %s (%s) - %s %s %s productos - %.2f
-                    """,
+                            2. %s - %s %s (%s) - %s - %.2f
+                            """,
                     trabajador.getP2().getCodigo(),
                     trabajador.getP2().getCliente().getNombre(),
                     trabajador.getP2().getCliente().getApellido(),
                     trabajador.getP2().getCliente().getProvincia(),
-                    (trabajador.getP2().getP1() != null) ? trabajador.getP2().getP1(): "",
-                    (trabajador.getP2().getP2() != null) ? ", " + trabajador.getP2().getP2(): "",
-                    (trabajador.getP2().getP3() != null) ? ", " + trabajador.getP2().getP3(): "",
+                    (trabajador.getP2().getCantidadProductos() < 2) ?
+                            trabajador.getP1().getCantidadProductos() + " Producto"
+                            : trabajador.getP1().getCantidadProductos() + " Productos",
                     trabajador.getP2().getTotal());
+            consultarPedido();
         } else {
             System.out.println("No hay pedido 2 asignado.");
         }
+    }
+
+    private static void consultarPedido() {
+        var s = new Scanner(System.in);
+
     }
 
     // Obtener un producto por su código
@@ -396,31 +451,30 @@ public class Menus {
                 2. %s - %d pedidos en proceso
                 Seleccione el trabajador:\s""");
     }
-    
+
     // Método para dar de alta un trabajador
     public static void altaTrabajador(Admin admin) {
         Scanner s = new Scanner(System.in);
-    
+
         // Solicitar datos del nuevo trabajador
         System.out.print("Ingrese el nombre del nuevo trabajador: ");
         String nombre = s.nextLine();
-    
+
         System.out.print("Ingrese el email del nuevo trabajador: ");
         String email = s.nextLine();
-    
+
         System.out.print("Ingrese la contraseña del nuevo trabajador: ");
         String clave = s.nextLine();
-    
+
         System.out.print("Ingrese el número de teléfono del nuevo trabajador: ");
         int telefono = Integer.parseInt(s.nextLine());
-    
+
         // Crear una nueva instancia de Trabajador
         Trabajador nuevoTrabajador = new Trabajador(nombre, email, clave, telefono);
-    
-        // Verificar si hay algún trabajador disponible y añadir el nuevo trabajador
-        System.out.println(admin.altaTrabajador(nuevoTrabajador) ? 
-            "Nuevo trabajador dado de alta exitosamente." : 
-            "No se pudo dar de alta al trabajador. Todos los puestos están ocupados.");
-    }
 
+        // Verificar si hay algún trabajador disponible y añadir el nuevo trabajador
+        System.out.println(admin.altaTrabajador(nuevoTrabajador) ?
+                "Nuevo trabajador dado de alta exitosamente." :
+                "No se pudo dar de alta al trabajador. Todos los puestos están ocupados.");
+    }
 }

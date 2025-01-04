@@ -20,9 +20,36 @@ public class Pedido {
     private Cliente cliente;
 
     //Atributo Estático
-    public static final int SHIPPING_DAYS = 5;
-
+    private static final int SHIPPING_DAYS = 5;
+    private static int contadorCodigo = 0;
     //Constructor
+
+    // Constructor para un solo producto
+    public Pedido(Producto p1, String comentario, String estado, int diasRetraso, Cliente cliente) {
+        this.p1 = p1;
+        this.p2 = null;
+        this.p3 = null;
+        this.comentario = comentario != null ? comentario : "";
+        this.estado = estado != null ? estado : "Recibido";
+        this.diasRetraso = diasRetraso;
+        this.cliente = cliente;
+        this.fechaPedido = LocalDate.now();
+        this.codigo = generarCodigoAleatorio();
+    }
+
+    // Constructor para dos productos
+    public Pedido(Producto p1, Producto p2, String comentario, String estado, int diasRetraso, Cliente cliente) {
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = null;
+        this.comentario = comentario != null ? comentario : "";
+        this.estado = estado != null ? estado : "Recibido";
+        this.diasRetraso = diasRetraso;
+        this.cliente = cliente;
+        this.fechaPedido = LocalDate.now();
+        this.codigo = generarCodigoAleatorio();
+    }
+
     //Trabajador y cliente quitados de parámetros para que no salten fallos, temporal
     public Pedido(Producto p1, Producto p2, Producto p3, String comentario, String estado, int diasRetraso, Cliente cliente) {
         this.p1 = p1;
@@ -155,18 +182,68 @@ public class Pedido {
 
     // Obtener el total del pedido sumando los precios de los productos
     public double getTotal() {
-        return p1.getPrecio() + p2.getPrecio() + p3.getPrecio();
+        double total = 0.0;
+        if (p1 != null) {
+            total += p1.getPrecio();
+        }
+        if (p2 != null) {
+            total += p2.getPrecio();
+        }
+        if (p3 != null) {
+            total += p3.getPrecio();
+        }
+        return total;
     }
 
-    // Generar un código aleatorio utilizando números del 0 al 9, la fecha de pedido y las iniciales del cliente
-    public String generarCodigoAleatorio() {
-        return this.codigo = "hola";
+    public int getCantidadProductos(){
+        int cantidad = 0;
+        if (p1 != null) {
+            cantidad += 1;
+        }
+        if (p2 != null) {
+            cantidad += 1;
+        }
+        if (p3 != null) {
+            cantidad += 1;
+        }
+        return cantidad;
     }
 
-    // Método para obtener la cantidad total de productos
-    public int getCantidadTotalProductos() {
-        return p1.getCantidad() + p2.getCantidad() + p3.getCantidad();
+    // Metodo para generar un código único
+    private String generarCodigoAleatorio() {
+        // Incrementar el contador estático
+        contadorCodigo++;
+
+        // Obtener las iniciales del cliente
+        String inicialesCliente = cliente.getNombre().substring(0, 1) + cliente.getApellido().substring(0, 1);
+
+        // Obtener las primeras tres letras de la localidad en mayúsculas
+        String localidad = cliente.getLocalidad().substring(0, Math.min(3, cliente.getLocalidad().length())).toUpperCase();
+
+        // Obtener los últimos tres dígitos del teléfono del cliente
+        String telefono = String.valueOf(cliente.getTelefono());
+        String numerosTelefono = telefono.substring(Math.max(0, telefono.length() - 3));
+
+        // Generar un código alfanumérico de 7 caracteres
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String codigoAlfanumerico = "";
+        int longitudCodigo = 7; // Longitud del código alfanumérico
+
+        for (int i = 0; i < longitudCodigo; i++) {
+            int indice = (contadorCodigo * (i + 1) + i) % caracteres.length();
+            codigoAlfanumerico += caracteres.charAt(indice);
+        }
+
+        // Concatenar todas las partes para formar el código final
+        return inicialesCliente + localidad + numerosTelefono + codigoAlfanumerico;
     }
+
+    // Metodo para obtener la cantidad total de productos
+    //public int getCantidadTotalProductos() {
+    //    return p1.getCantidad() + p2.getCantidad() + p3.getCantidad();
+    //}
+
+    
 
     // Representar el pedido como una cadena de texto
     @Override
@@ -175,7 +252,7 @@ public class Pedido {
                 codigo,
                 cliente.getNombre(),
                 cliente.getApellido(),
-                getCantidadTotalProductos(),
+                //getCantidadTotalProductos(),
                 getTotal(),
                 comentario,
                 estado,

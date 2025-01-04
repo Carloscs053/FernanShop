@@ -6,27 +6,39 @@ import java.util.regex.Pattern;
 public class Utils {
     //TODO estoy tocando cosas relativamente insignificantes y eso que nos vamos ahorrando en tiempo de desarrollo
     public static void pulseParaContinuar() {
-        var s  = new Scanner(System.in);
-        System.out.println("Pulse cualquier tecla para continuar...");
+        var s = new Scanner(System.in);
+        System.out.print("Pulse cualquier tecla para continuar...");
         s.nextLine();
     }
 
-    // Método para limpiar la pantalla imprimiendo varias líneas en blanco
+    // Metodo para limpiar la pantalla imprimiendo varias líneas en blanco
     public static void limpiaPantalla() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
     }
 
+    public static void cargandoPantalla() {
+        System.out.print("\tCargando pantalla");
+        for (int i = 0; i <= 3; i++) {
+            System.out.print((i != 3) ? "." : "\n");
+            try {
+                Thread.sleep(350);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     //TODO métodos que deben ir a sus respectivas clases??
-    // Método para validar un email utilizando una expresión regular
+    //Metodo para validar un email utilizando una expresión regular
     //he buscado validar email en internet y con ayuda de mni hermano lo he puesto asi
-    public static boolean validaEmail (String email) {
+    public static boolean validaEmail(String email) {
         return Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$").matcher(email).matches();
     }
 
-    // Método para validar una clave con ciertas condiciones
+    // Metodo para validar una clave con ciertas condiciones
     //he rescatado esta validacion de un ejercicio ya hecho en clase
     public static boolean validaClave(String clave) {
         //primero validamos la longitud
@@ -49,7 +61,7 @@ public class Utils {
         return true;
     }
 
-    // Método para validar una contraseña que tenga al menos 5 caracteres, una mayúscula y un número
+    // Metodo para validar una contraseña que tenga al menos 5 caracteres, una mayúscula y un número
     public static boolean validaContrasenia(String contrasenia) {
         boolean tieneMayuscula = false;
         boolean tieneNumero = false;

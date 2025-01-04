@@ -97,10 +97,4 @@ public class Producto {
                 ", precio =" + precio +
                 '}';
     }
-
-    //TODO Cantidad de qué? Es el stock?
-    public int getCantidad() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCantidad'");
-    }
 }
