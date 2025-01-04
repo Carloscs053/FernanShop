@@ -65,6 +65,28 @@ public class Admin {
         return false;
     }
 
+    public boolean bajaTrabajador(Trabajador trabajador) {
+        if (trabajador1 != null && trabajador1.equals(trabajador)) {
+            trabajador1 = null;
+            return true;
+        }
+        if (trabajador2 != null && trabajador2.equals(trabajador)) {
+            trabajador2 = null;
+            return true;
+        }
+        if (trabajador3 != null && trabajador3.equals(trabajador)) {
+            trabajador3 = null;
+            return true;
+        }
+        return false;
+    }
+
+    public void añadeTrabajador(Trabajador trabajador) {
+        //voy a añadir un trabajador que me pasen por parametros desde el menu con el metodo altaTrabajador
+        //y lo añado a la lista de trabajadores
+        altaTrabajador(trabajador);
+    }
+
     //toString
     @Override
     public String toString() {

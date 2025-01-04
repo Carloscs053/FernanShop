@@ -58,6 +58,7 @@ public class Menus {
         var s = new Scanner(System.in);
         String opTrabajador;
         do {
+            // Mostrar el menú del trabajador
             System.out.printf("""
                     FERNANSHOP
                     Bienvenido %s. Tienes %d pedidos asignados.
@@ -73,43 +74,50 @@ public class Menus {
             opTrabajador = s.nextLine();
             switch (opTrabajador) {
                 case "1":
+                    // Consultar los pedidos asignados al trabajador
                     pedidosTrabajador(trabajador);
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 case "2":
+                    // Modificar el estado de un pedido
                     menuEstado(trabajador);
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 case "3":
+                    // Consultar el catálogo de productos
                     String catalogo = tienda.verCatalogo(productosData);
                     System.out.println(catalogo);
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 case "4":
+                    // Modificar un producto del catálogo
                     modificarProducto(trabajador, productosData);
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 case "5":
+                    // Ver el perfil del trabajador
                     System.out.println(trabajador.verPerfil());
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 case "6":
-                    //aquí se llama al metodo modificarDatos de la clase Trabajador
+                    // Modificar los datos personales del trabajador
                     modificarDatosTrabajador(trabajador);
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 case "7":
+                    // Cerrar sesión
                     System.out.println("Cerrando sesión...");
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
                     break;
                 default:
+                    // Opción no válida
                     System.out.println("Opción no válida. Intente de nuevo.");
                     Utils.pulseParaContinuar();
                     Utils.limpiaPantalla();
@@ -117,13 +125,12 @@ public class Menus {
         } while (!opTrabajador.equals("7"));
     }
 
-    // cossa del trabajador
-// Menú para actualizar el estado de un pedido
+    // Menú para actualizar el estado de un pedido
     public static void menuEstado(Trabajador trabajador) {
         Scanner s = new Scanner(System.in);
         System.out.println("Ingrese el código del pedido que desea modificar:");
         String codigoPedido = s.nextLine();
-
+        String confirmacion = "Estado actualizado correctamente.";
         Pedido pedido = obtenerPedidoPorCodigo(trabajador, codigoPedido);
 
         if (pedido == null) {
@@ -149,49 +156,61 @@ public class Menus {
             String opEstado = s.nextLine();
             switch (opEstado) {
                 case "1":
+                    // Cambiar el estado del pedido a "Recibido"
                     pedido.setEstado("Recibido");
+                    System.out.println(confirmacion);
                     recibido = true;
                     break;
                 case "2":
+                    // Cambiar el estado del pedido a "En Preparación" si ya está "Recibido"
                     if (recibido) {
                         pedido.setEstado("En Preparación");
+                        System.out.println(confirmacion);
                         enPreparacion = true;
                     } else {
                         System.out.println("Debe seleccionar 'Recibido' antes de seleccionar esta opción.");
                     }
                     break;
                 case "3":
+                    // Cambiar el estado del pedido a "Retrasado" si ya está "En Preparación"
                     if (enPreparacion) {
                         pedido.setEstado("Retrasado");
+                        System.out.println(confirmacion);
                     } else {
                         System.out.println("Debe seleccionar 'En Preparación' antes de seleccionar esta opción.");
                     }
                     break;
                 case "4":
+                    // Cambiar el estado del pedido a "Cancelado"
                     pedido.setEstado("Cancelado");
+                    System.out.println(confirmacion);
                     cancelado = true;
                     break;
                 case "5":
+                    // Cambiar el estado del pedido a "Enviado" si ya está "En Preparación" y no está "Cancelado"
                     if (enPreparacion && !cancelado) {
                         pedido.setEstado("Enviado");
-                        //aqui se le resta 1 al contador de pedidos del trabajador
+                        System.out.println(confirmacion);
+                        // Restar 1 al contador de pedidos del trabajador
                         trabajador.setContador(trabajador.getContador() - 1);
                     } else {
                         System.out.println("Debe seleccionar 'En Preparación' antes de seleccionar esta opción y no puede estar 'Cancelado'.");
                     }
                     break;
                 default:
+                    // Opción no válida
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
             break;
         }
     }
 
+    // Obtener un pedido por su código
     private static Pedido obtenerPedidoPorCodigo(Trabajador trabajador, String codigo) {
-        if (trabajador.getP1() != null && trabajador.getP1().getCodigo().equalsIgnoreCase(codigo)) {
+        if (trabajador.getP1() != null && trabajador.getP1().getCodigo().equals(codigo)) {
             return trabajador.getP1();
         }
-        if (trabajador.getP2() != null && trabajador.getP2().getCodigo().equalsIgnoreCase(codigo)) {
+        if (trabajador.getP2() != null && trabajador.getP2().getCodigo().equals(codigo)) {
             return trabajador.getP2();
         }
         // Añadir más comprobaciones si hay más pedidos
@@ -199,45 +218,60 @@ public class Menus {
         return null;
     }
 
+    // Consultar los pedidos asignados al trabajador
     public static void pedidosTrabajador(Trabajador trabajador) {
         System.out.println("==== Pedidos asignados al trabajador ====");
         if (trabajador.getP1() != null) {
-            System.out.printf("""
-                    ==== Asignación de trabajadores a pedidos ====
-                    1. %s - %s %s - %d productos - %.2f
-                    """, trabajador.getP1().getCodigo(), trabajador.getP1().getCliente().getNombre(), trabajador.getP1().getCliente().getApellido(), trabajador.getP1().getCantidadTotalProductos(), trabajador.getP1().getTotal());
+            System.out.printf("""  
+                    1. %s - %s %s (%s) - %s %s %s - %.2f
+                    """,
+                    trabajador.getP1().getCodigo(),
+                    trabajador.getP1().getCliente().getNombre(),
+                    trabajador.getP1().getCliente().getApellido(),
+                    trabajador.getP1().getCliente().getProvincia(),
+                    (trabajador.getP1().getP1() != null) ? trabajador.getP1().getP1().getNombre(): "",
+                    (trabajador.getP1().getP2() != null) ? ", " + trabajador.getP1().getP2().getNombre(): "",
+                    (trabajador.getP1().getP3() != null) ? ", " + trabajador.getP1().getP3().getNombre(): "",
+                    trabajador.getP1().getTotal());
         } else {
             System.out.println("No hay pedido 1 asignado.");
         }
         if (trabajador.getP2() != null) {
             System.out.printf("""
-                    ==== Asignación de trabajadores a pedidos ====
-                    2. %s - %s %s - %d productos - %.2f
-                    """, trabajador.getP2().getCodigo(), trabajador.getP2().getCliente().getNombre(), trabajador.getP2().getCliente().getApellido(), trabajador.getP2().getCantidadTotalProductos(), trabajador.getP2().getTotal());
+                    2. %s - %s %s (%s) - %s %s %s productos - %.2f
+                    """,
+                    trabajador.getP2().getCodigo(),
+                    trabajador.getP2().getCliente().getNombre(),
+                    trabajador.getP2().getCliente().getApellido(),
+                    trabajador.getP2().getCliente().getProvincia(),
+                    (trabajador.getP2().getP1() != null) ? trabajador.getP2().getP1(): "",
+                    (trabajador.getP2().getP2() != null) ? ", " + trabajador.getP2().getP2(): "",
+                    (trabajador.getP2().getP3() != null) ? ", " + trabajador.getP2().getP3(): "",
+                    trabajador.getP2().getTotal());
         } else {
             System.out.println("No hay pedido 2 asignado.");
         }
-        System.out.print("Seleccione el pedido a asignar : ");
     }
 
+    // Obtener un producto por su código
     private static Producto obtenerProducto(Trabajador trabajador, ProductosData productosData) {
         Scanner s = new Scanner(System.in);
         System.out.print("Ingrese el código del producto que desea modificar: ");
         String codigoProducto = s.nextLine();
-
-        if (ProductosData.Producto1 != null && ProductosData.Producto1.getCodigo().equalsIgnoreCase(codigoProducto)) {
+//Esto lo logico seria hacerlo en su clase correspondiente
+        if (ProductosData.Producto1 != null && ProductosData.Producto1.getCodigo().equals(codigoProducto)) {
             return ProductosData.Producto1;
         }
-        if (ProductosData.Producto2 != null && ProductosData.Producto2.getCodigo().equalsIgnoreCase(codigoProducto)) {
+        if (ProductosData.Producto2 != null && ProductosData.Producto2.getCodigo().equals(codigoProducto)) {
             return ProductosData.Producto2;
         }
-        if (ProductosData.Producto3 != null && ProductosData.Producto3.getCodigo().equalsIgnoreCase(codigoProducto)) {
+        if (ProductosData.Producto3 != null && ProductosData.Producto3.getCodigo().equals(codigoProducto)) {
             return ProductosData.Producto3;
         }
-        if (ProductosData.Producto4 != null && ProductosData.Producto4.getCodigo().equalsIgnoreCase(codigoProducto)) {
+        if (ProductosData.Producto4 != null && ProductosData.Producto4.getCodigo().equals(codigoProducto)) {
             return ProductosData.Producto4;
         }
-        if (ProductosData.Producto5 != null && ProductosData.Producto5.getCodigo().equalsIgnoreCase(codigoProducto)) {
+        if (ProductosData.Producto5 != null && ProductosData.Producto5.getCodigo().equals(codigoProducto)) {
             return ProductosData.Producto5;
         }
 
@@ -245,6 +279,7 @@ public class Menus {
         return null;
     }
 
+    // Modificar un producto
     public static void modificarProducto(Trabajador trabajador, ProductosData productosData) {
         Scanner s = new Scanner(System.in);
         Producto producto = obtenerProducto(trabajador, productosData);
@@ -255,12 +290,12 @@ public class Menus {
         }
 
         System.out.printf("""
-                =====================================
-                          MODIFICAR PRODUCTO
-                =====================================
-                Producto actual:
-                %s
-                =====================================""", producto.pintaProducto());
+                ==========================
+                    MODIFICAR PRODUCTO
+                ==========================
+                    Producto actual:
+                    %s
+                ==========================""", producto.pintaProducto());
 
         System.out.print("\nIngrese el nuevo nombre del producto (deje en blanco para mantener el valor actual): ");
         String nuevoNombre = s.nextLine();
@@ -276,26 +311,29 @@ public class Menus {
         producto.modificarProducto(nuevoNombre, nuevoPrecio, nuevoStock);
 
         System.out.println("""
-                =====================================
-                Producto modificado exitosamente.
-                =====================================""");
+                =========================================
+                    Producto modificado exitosamente.
+                =========================================""");
     }
 
+    // Modificar los datos personales del trabajador
     public static void modificarDatosTrabajador(Trabajador trabajador) {
         Scanner s = new Scanner(System.in);
-        System.out.println("Ingrese el nuevo nombre del trabajador (deje en blanco para mantener el valor actual):");
+        System.out.print("Introduzca el nombre para actualizarlo (deje en blanco para mantener el valor actual): ");
         String nuevoNombre = s.nextLine();
-        System.out.println("Ingrese la nueva contraseña del trabajador (deje en blanco para mantener el valor actual):");
-        String nuevaContrasena = s.nextLine();
+        System.out.print("Ingrese la nueva contraseña (deje en blanco para mantener el valor actual): ");
+        String nuevaClave = s.nextLine();
+        System.out.print("Ingrese el numero de telefono (deje en blanco para mantener el valor actual): ");
+        int nuevoTelefono = Integer.parseInt(s.nextLine());
 
-        trabajador.modificarDatos(nuevoNombre, nuevaContrasena);
+        trabajador.modificarDatos(nuevoNombre, nuevaClave, nuevoTelefono);
 
         System.out.println("Datos del trabajador modificados exitosamente.");
     }
 
+    // Menú para el registro de usuarios
     public static void menuRegistro() {
-        //aqui se le pedida al usuario que introducza los datos para registrarse siempre que no exista ya y haya hueco entre los clientes
-
+        // Aquí se le pedirá al usuario que introduzca los datos para registrarse siempre que no exista ya y haya hueco entre los clientes
     }
 
     // Menú para el administrador
@@ -303,6 +341,7 @@ public class Menus {
         Utils.limpiaPantalla();
         var s = new Scanner(System.in);
         String opAdmin;
+        // Mostrar el menú del administrador
         System.out.printf("""
                 FERNANSHOP
                 Bienvenido %s. Tiene 2 pedido por asignar.
@@ -318,57 +357,70 @@ public class Menus {
         opAdmin = s.nextLine();
         switch (opAdmin) {
             case "1":
-                //menuAsignaPedido(pedido);
+                menuAsignaPedido();
                 break;
             case "2":
-                //menuEstado(pedido);
+                //menuEstado(admin);
                 break;
             case "3":
-                //altaTrabajador();
+                altaTrabajador(admin);
                 break;
             case "4":
-                //verPedidos();
+                // verPedidos();
                 break;
             case "5":
-                //verClientes();
+                // verClientes();
                 break;
             case "6":
-                //verTrabajadores();
+                // verTrabajadores();
                 break;
             case "7":
+                // Cerrar sesión
+                System.out.println("Cerrando sesión...");
+                Utils.pulseParaContinuar();
+                Utils.limpiaPantalla();
                 break;
             default:
-                break;
+                // Opción no válida
+                System.out.println("Opción no válida. Intente de nuevo.");
+                Utils.pulseParaContinuar();
+                Utils.limpiaPantalla();
         }
     }
 
-    // Mostrar el estado de un pedido
-    /*public void estadoPedido(Trabajador trabajador) {
-        System.out.printf("""
-                ===========  Pedido %d ===========
-                Estado: %s
-                Cliente: %s %s
-                Dirección: %s
-                Localidad: %s
-                Teléfono: %d
-                Correo: %s
-                Fecha del Pedido: %s
-                Fecha de entrega estimada: %s
-                Comentario del pedido: %s
-                Detalle del pedido
-                \t%s
-                \t%s
-                Total pedido: %f""", trabajador.getP1().getCodigo(), trabajador.getP1().getEstado(), trabajador.getP1().getCliente().getNombre(), trabajador.getP1().getCliente().getApellido(), trabajador.getP1().getCliente().getDireccion(), trabajador.getP1().getCliente().getLocalidad(), trabajador.getP1().getCliente().getTelefono(), trabajador.getP1().getCliente().getEmail(), trabajador.getP1().getFechaPedido(), trabajador.getP1().getFechaEntrega(), trabajador.getP1().getComentario(), trabajador.getP1().getProducto1().pintaProducto(), trabajador.getP1().getProducto2().pintaProducto(), trabajador.getP1().getTotal());
-    }*/
-
-
-// Menú para asignar un pedido a un trabajador
-    /*public void menuAsignaPedido(Pedido pedido) {
+    // Menú para asignar un pedido a un trabajador
+    public static void menuAsignaPedido() {
         System.out.printf("""
                 ==== Asignación del pedido %d  ====
                 1. %s - %d pedido en proceso
                 2. %s - %d pedidos en proceso
-                Seleccione el trabajador:\s""", pedido.getCodigo(), pedido.getTrabajador().getNombre(), pedido.getTrabajador().getContador(), pedido.getTrabajador().getNombre(), pedido.getTrabajador().getContador());
-    }*/
+                Seleccione el trabajador:\s""");
+    }
+    
+    // Método para dar de alta un trabajador
+    public static void altaTrabajador(Admin admin) {
+        Scanner s = new Scanner(System.in);
+    
+        // Solicitar datos del nuevo trabajador
+        System.out.print("Ingrese el nombre del nuevo trabajador: ");
+        String nombre = s.nextLine();
+    
+        System.out.print("Ingrese el email del nuevo trabajador: ");
+        String email = s.nextLine();
+    
+        System.out.print("Ingrese la contraseña del nuevo trabajador: ");
+        String clave = s.nextLine();
+    
+        System.out.print("Ingrese el número de teléfono del nuevo trabajador: ");
+        int telefono = Integer.parseInt(s.nextLine());
+    
+        // Crear una nueva instancia de Trabajador
+        Trabajador nuevoTrabajador = new Trabajador(nombre, email, clave, telefono);
+    
+        // Verificar si hay algún trabajador disponible y añadir el nuevo trabajador
+        System.out.println(admin.altaTrabajador(nuevoTrabajador) ? 
+            "Nuevo trabajador dado de alta exitosamente." : 
+            "No se pudo dar de alta al trabajador. Todos los puestos están ocupados.");
+    }
 
 }

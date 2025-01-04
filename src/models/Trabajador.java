@@ -111,12 +111,15 @@ public class Trabajador {
         return resultado;
     }
 
-    public void modificarDatos(String nuevoNombre, String nuevaClave) {
+    public void modificarDatos(String nuevoNombre, String nuevaClave, int nuevoTelefono) {
         if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
             this.nombre = nuevoNombre;
         }
         if (nuevaClave != null && !nuevaClave.isEmpty()) {
             this.clave = nuevaClave;
+        }
+        if (nuevoTelefono != 0) {
+            this.telefono = nuevoTelefono;
         }
     }
 
