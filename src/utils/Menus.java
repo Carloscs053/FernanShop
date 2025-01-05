@@ -29,7 +29,7 @@ public class Menus {
                 6.- Cerrar sesión
                 \n
                 Seleccione una opcion:\s""", cliente.getNombre());
-        opCliente = s.nextLine();
+        /*opCliente = s.nextLine();
         switch (opCliente) {
             case "1":
                 //verCatalogo();
@@ -50,7 +50,7 @@ public class Menus {
                 break;
             default:
                 break;
-        }
+        }*/
     }
 
     // Menú para el trabajador
@@ -213,8 +213,8 @@ public class Menus {
                     // Opción no válida
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
-                cambiarFechaEntrega(pedido);
-                aniadirComentario(pedido);
+            cambiarFechaEntrega(pedido);
+            aniadirComentario(pedido);
             break;
         }
     }

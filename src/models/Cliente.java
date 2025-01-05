@@ -1,5 +1,7 @@
 package models;
 
+import data.ProductosData;
+
 public class Cliente {
     private String nombre;
     private String apellido;
@@ -26,11 +28,12 @@ public class Cliente {
         this.clave = clave;
         pedido1 = null;
         pedido2 = null;
+        //Posiblemente este contador no haga falta, se comprueban los pedidos y ya
         cuentaPedido = 0;
     }
 
     //Constructor copia
-
+    //Creo que esto no hace falta
     public Cliente(Cliente cliente) {
         nombre = cliente.nombre;
         apellido = cliente.apellido;
@@ -131,6 +134,25 @@ public class Cliente {
     public boolean loginCliente(String email, String clave) {
         return this.email.equals(email) && this.clave.equals(clave);
     }
+
+    //Indica si tiene los pedidos al completo
+    public boolean pedidosLleno() {
+        return pedido1 != null && pedido2 != null;
+    }
+
+    //Método para realizar un pedido
+    public boolean realizaPedido(String opProducto) {
+        if (pedido1 == null) {
+            pedido1 = new Pedido();
+            while (pedido1.getP3() == null) {
+                if (pedido1.getP1() == null) {
+                    pedido1.anadeProducto(opProducto);
+                }
+            }
+        }
+        return false;
+    }
+
 
     //Cuenta los pedidos que tiene el cliente
     public void cuentaPedido() {

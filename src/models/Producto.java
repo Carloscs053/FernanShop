@@ -1,5 +1,7 @@
 package models;
 
+import data.ProductosData;
+
 public class Producto {
 
     //Atributos
@@ -72,7 +74,7 @@ public class Producto {
 
     //pintar un producto
     public String pintaProducto() {
-        return nombre + String.format("\n%.2f", precio) + " Euros\n";
+        return nombre + String.format(": %.2f", precio) + " Euros\n";
     }
 
     //Modificar un producto

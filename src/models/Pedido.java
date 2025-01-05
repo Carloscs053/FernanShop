@@ -1,5 +1,7 @@
 package models;
 
+import data.ProductosData;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,8 +24,21 @@ public class Pedido {
     //Atributo Estático
     private static final int SHIPPING_DAYS = 5;
     private static int contadorCodigo = 0;
-    //Constructor
 
+
+    //Constructor
+    public Pedido(){
+        p1 = null;
+        p2 = null;
+        p3 = null;
+        codigo = generarCodigoAleatorio();
+        fechaPedido = LocalDate.now();
+        comentario = "";
+        estado = "Recibido";
+        diasRetraso = 0;
+    }
+
+    //CREO QUE SOLO HACE FALTA UN CONSTRUCTOR INDEPENDIENTEMENTE DE LOS PRODUCTOS, SE DEJAN A NULL Y YA ESTÁ
     // Constructor para un solo producto
     public Pedido(Producto p1, String comentario, String estado, int diasRetraso, Cliente cliente) {
         this.p1 = p1;
@@ -43,7 +58,7 @@ public class Pedido {
         this.p2 = p2;
         this.p3 = null;
         this.comentario = comentario != null ? comentario : "";
-        this.estado = estado != null ? estado : "Recibido";
+        this.estado = ((estado != null) ? estado : "Recibido");
         this.diasRetraso = diasRetraso;
         this.cliente = cliente;
         this.fechaPedido = LocalDate.now();
@@ -51,14 +66,14 @@ public class Pedido {
     }
 
     //Trabajador y cliente quitados de parámetros para que no salten fallos, temporal
-    public Pedido(Producto p1, Producto p2, Producto p3, String comentario, String estado, int diasRetraso, Cliente cliente) {
-        this.p1 = p1;
-        this.p2 = p2;
-        this.p3 = p3;
+    public Pedido(String comentario, String estado, int diasRetraso/*Cliente cliente*/) {
+        this.p1 = null;
+        this.p2 = null;
+        this.p3 = null;
         this.comentario = "";
         this.estado = "Recibido";
         this.diasRetraso = diasRetraso;
-        this.cliente = cliente;
+        //this.cliente = cliente;
         this.fechaPedido = LocalDate.now();
         this.codigo = generarCodigoAleatorio();
     }
@@ -162,9 +177,102 @@ public class Pedido {
         return fechaPedido.plusDays(SHIPPING_DAYS + diasRetraso); //(SHIPPING_DAYS + Atributo de días de retraso) para calcular los días de retraso
     }
 
+    //Añade productos al pedido
+    /*public void anadeProducto(String opCatalogo) {
+        if (pedido1 == null && pedido1.getP1() == null) {
+            if (opCatalogo.equals("1") && ProductosData.Producto1 != null) pedido1.setP1(ProductosData.Producto1);
+        }
+        if (pedido1 == null && pedido2.getP1() == null) {
+            if (opCatalogo.equals("2") && ProductosData.Producto2 != null) pedido2.setP2(ProductosData.Producto2);
+        }
+        if (pedido1 == null && pedido1.getP1() == null) {
+            if (opCatalogo.equals("1") && ProductosData.Producto1 != null) pedido1.setP1(ProductosData.Producto1);
+        }
+        if (pedido1 == null && pedido1.getP1() == null) {
+            if (opCatalogo.equals("1") && ProductosData.Producto1 != null) pedido1.setP1(ProductosData.Producto1);
+        }
+        if (pedido1 == null && pedido1.getP1() == null) {
+            if (opCatalogo.equals("1") && ProductosData.Producto1 != null) pedido1.setP1(ProductosData.Producto1);
+        }
+    }*/
+
+    public boolean anadeProducto(String opProducto) {
+        if (p1 == null)  {
+            switch (opProducto) {
+                case "1" -> {
+                    p1 = ProductosData.Producto1;
+                    return true;
+                }
+                case "2" -> {
+                    p1 = ProductosData.Producto2;
+                    return true;
+                }
+                case "3" -> {
+                    p1 = ProductosData.Producto3;
+                    return true;
+                }
+                case "4" -> {
+                    p1 = ProductosData.Producto4;
+                    return true;
+                }
+                case "5" -> {
+                    p1 = ProductosData.Producto5;
+                    return true;
+                }
+            }
+        } else if (p1 != null && p2 == null){
+            switch (opProducto) {
+                case "1" -> {
+                    p2 = ProductosData.Producto1;
+                    return true;
+                }
+                case "2" -> {
+                    p2 = ProductosData.Producto2;
+                    return true;
+                }
+                case "3" -> {
+                    p2 = ProductosData.Producto3;
+                    return true;
+                }
+                case "4" -> {
+                    p2 = ProductosData.Producto4;
+                    return true;
+                }
+                case "5" -> {
+                    p2 = ProductosData.Producto5;
+                    return true;
+                }
+            }
+        } else if (p1 != null && p2 != null & p3 == null) {
+            switch (opProducto) {
+                case "1" -> {
+                    p3 = ProductosData.Producto1;
+                    return true;
+                }
+                case "2" -> {
+                    p3 = ProductosData.Producto2;
+                    return true;
+                }
+                case "3" -> {
+                    p3 = ProductosData.Producto3;
+                    return true;
+                }
+                case "4" -> {
+                    p3 = ProductosData.Producto4;
+                    return true;
+                }
+                case "5" -> {
+                    p3 = ProductosData.Producto5;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     //Método que agrega productos al pedido
     //Lo pongo como boolean para que en el main se le de feedback al cliente de si se ha hecho o no
-    public boolean agragaProducto(Producto producto) {
+    public boolean agregaProducto(Producto producto) {
         if (p1 == null) {
             p1 = producto;
             return true;
@@ -195,7 +303,7 @@ public class Pedido {
         return total;
     }
 
-    public int getCantidadProductos(){
+    public int getCantidadProductos() {
         int cantidad = 0;
         if (p1 != null) {
             cantidad += 1;
@@ -243,7 +351,6 @@ public class Pedido {
     //    return p1.getCantidad() + p2.getCantidad() + p3.getCantidad();
     //}
 
-    
 
     // Representar el pedido como una cadena de texto
     @Override

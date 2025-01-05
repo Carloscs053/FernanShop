@@ -8,6 +8,7 @@ import utils.Menus;
 import utils.Utils;
 
 import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MainFernanShop {
@@ -25,9 +26,9 @@ public class MainFernanShop {
         Trabajador trabajador3 = TrabajadoresData.trabajador3;
         //Creo que esto se crea en el controlador, al igual que todos los users
         Admin admin = new Admin("admin", "admin@fernanshop.com", "1234");
-        Pedido pedido1 = new Pedido(ProductosData.Producto1, ProductosData.Producto2, ProductosData.Producto3, "Comentario del pedido", "Recibido", 0, cliente1);
+        //Pedido pedido1 = new Pedido(ProductosData.Producto1, ProductosData.Producto2, ProductosData.Producto3, "Comentario del pedido", "Recibido", 0, cliente1);
         Pedido pedido2 = new Pedido(ProductosData.Producto4, ProductosData.Producto3, "", "Recibido", 0, cliente1);
-        trabajador2.setP1(pedido1);
+        //trabajador2.setP1(pedido1);
         trabajador2.setP2(pedido2);
         trabajador2.cuentaPedidos();
 
@@ -83,7 +84,54 @@ public class MainFernanShop {
                                 logueado = true;
                                 Utils.limpiaPantalla();
                                 //Do-while
-                                Menus.menuCliente(tempCliente);
+                                String opCliente = "", opProducto = "";
+                                do {
+                                    Menus.menuCliente(tempCliente);
+                                    opCliente = s.nextLine();
+
+                                    switch (opCliente) {
+                                        case "1":
+                                            //Aquí pinta el catálogo
+                                            System.out.println(tienda.pintaCatalogo());
+                                            Utils.pulseParaContinuar();
+                                            break;
+                                        case "2":
+                                            //Aquí puede realizar el pedido
+                                            System.out.println(tienda.pintaCatalogo());
+                                            System.out.println();
+                                            System.out.println("6. Realizar pedido");
+                                            System.out.println("7. Cancelar pedido");
+                                            do {
+                                                switch (opProducto) {
+
+                                                }
+                                            } while (!opProducto.equals("7"));
+
+                                            //realizaPedido();
+                                            break;
+                                        case "3":
+                                            //Aquí comprueba los pedidos del usuario
+                                            //verPedidos();
+                                            break;
+                                        case "4":
+                                            //Muestra los datos del usuario
+                                            //verPerfil();
+                                            break;
+                                        case "5":
+                                            //Modifica los datos del usuario si este así lo quiere
+                                            //cliente.modificarDatos();
+                                            break;
+                                        case "6":
+                                            //Sale de la sesión del usuario
+                                            System.out.println("Hasta pronto!");
+                                            Utils.pulseParaContinuar();
+                                            Utils.limpiaPantalla();
+                                            break;
+                                        default:
+                                            System.out.println("Opción no válida");
+                                            break;
+                                    }
+                                } while (!opCliente.equals("6"));
                             } else {
                                 //Si no es nada de lo anterior, las credenciales no son correctas
                                 System.out.println("Email y/o contraseña incorrectas");
