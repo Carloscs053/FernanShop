@@ -173,6 +173,126 @@ public class Pedido {
         return inicialesCliente + localidad + numerosTelefono + codigoAlfanumerico;
     }
 
+    //Admin asigna un trabajador
+    public boolean asignarAutomaticamente(Tienda tienda) {
+        Trabajador[] trabajadores = {tienda.getTrabajador1(), tienda.getTrabajador2(), tienda.getTrabajador3()};
+        Trabajador trabajadorMenosPedidos = null;
+
+        for (Trabajador trabajador : trabajadores) {
+            if (trabajador != null && trabajador.puedeAceptarPedido()) {
+                if (trabajadorMenosPedidos == null || trabajador.contarPedidos() < trabajadorMenosPedidos.contarPedidos()) {
+                    trabajadorMenosPedidos = trabajador;
+                }
+            }
+        }
+
+        if (trabajadorMenosPedidos != null) {
+            trabajadorMenosPedidos.asignarPedido(this);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean asignarManualmente(Tienda tienda, int seleccionTrabajador) {
+        Trabajador trabajadorSeleccionado = null;
+        switch (seleccionTrabajador) {
+            case 1:
+                trabajadorSeleccionado = tienda.getTrabajador1();
+                break;
+            case 2:
+                trabajadorSeleccionado = tienda.getTrabajador2();
+                break;
+            case 3:
+                trabajadorSeleccionado = tienda.getTrabajador3();
+                break;
+            default:
+                return false;
+        }
+
+        if (trabajadorSeleccionado != null && trabajadorSeleccionado.puedeAceptarPedido()) {
+            trabajadorSeleccionado.asignarPedido(this);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean asignarSiguientePedidoAutomaticamente(Tienda tienda) {
+    Trabajador t1 = tienda.getTrabajador1();
+    Trabajador t2 = tienda.getTrabajador2();
+    Trabajador t3 = tienda.getTrabajador3();
+    Trabajador trabajadorMenosPedidos = null;
+
+    // Contar cuántos trabajadores pueden aceptar pedidos
+    int contadorTrabajadoresActivos = 0;
+
+    // Verificar cada trabajador
+    if (t1 != null && t1.puedeAceptarPedido()) {
+        contadorTrabajadoresActivos++;
+        trabajadorMenosPedidos = t1; // Inicialmente, asignamos el primero que puede aceptar
+    }
+    if (t2 != null && t2.puedeAceptarPedido()) {
+        contadorTrabajadoresActivos++;
+        if (trabajadorMenosPedidos == null || t2.contarPedidos() < trabajadorMenosPedidos.contarPedidos()) {
+            trabajadorMenosPedidos = t2;
+        }
+    }
+    if (t3 != null && t3.puedeAceptarPedido()) {
+        contadorTrabajadoresActivos++;
+        if (trabajadorMenosPedidos == null || t3.contarPedidos() < trabajadorMenosPedidos.contarPedidos()) {
+            trabajadorMenosPedidos = t3;
+        }
+    }
+
+    // Si solo hay un trabajador activo, asignarle el pedido hasta su límite
+    if (trabajadorMenosPedidos != null) {
+        if (contadorTrabajadoresActivos == 1) {
+            // Asignar hasta que alcance su límite de 2 pedidos
+            if (trabajadorMenosPedidos.contarPedidos() < 2) {
+                Pedido siguientePedido = Pedido.obtenerSiguientePedidoSinAsignar(tienda);
+                if (siguientePedido != null) {
+                    trabajadorMenosPedidos.asignarPedido(siguientePedido);
+                    return true;
+                }
+            }
+            return false; // Ya alcanzó su límite de pedidos
+        }
+
+        // Si hay más de un trabajador, verificar quién tiene menos pedidos
+        int pedidosMenos = trabajadorMenosPedidos.contarPedidos();
+        boolean esMenosQueT1 = (t1 != null && pedidosMenos < t1.contarPedidos());
+        boolean esMenosQueT2 = (t2 != null && pedidosMenos < t2.contarPedidos());
+        boolean esMenosQueT3 = (t3 != null && pedidosMenos < t3.contarPedidos());
+
+        if ((trabajadorMenosPedidos == t1 && esMenosQueT2 && esMenosQueT3) ||
+            (trabajadorMenosPedidos == t2 && esMenosQueT1 && esMenosQueT3) ||
+            (trabajadorMenosPedidos == t3 && esMenosQueT1 && esMenosQueT2)) {
+            // Asignar automáticamente el siguiente pedido al trabajador con menos pedidos
+            Pedido siguientePedido = Pedido.obtenerSiguientePedidoSinAsignar(tienda);
+            if (siguientePedido != null) {
+                trabajadorMenosPedidos.asignarPedido(siguientePedido);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+public static Pedido obtenerSiguientePedidoSinAsignar(Tienda tienda) {
+        if (tienda.getPedido1().getTrabajador() == null) {
+            return tienda.getPedido1();
+        }
+        if (tienda.getPedido2().getTrabajador() == null) {
+            return tienda.getPedido2();
+        }
+        if (tienda.getPedido3().getTrabajador() == null) {
+            return tienda.getPedido3();
+        }
+        if (tienda.getPedido4().getTrabajador() == null) {
+            return tienda.getPedido4();
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return String.format("Pedido %s: %s %s, %d productos, Total: %.2f, Comentario: %s, Estado: %s, Fecha: %s",
