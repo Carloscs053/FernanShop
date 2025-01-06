@@ -85,11 +85,39 @@ public class Trabajador {
 
     //Otros métodos
 
+    public boolean puedeAceptarPedido() {
+        return p1 == null || p2 == null;
+    }
+
+    public boolean asignarPedido(Pedido pedido) {
+        if (p1 == null) {
+            p1 = pedido;
+            pedido.setTrabajador(this);
+            return true;
+        } else if (p2 == null) {
+            p2 = pedido;
+            pedido.setTrabajador(this);
+            return true;
+        }
+        return false;
+    }
+
+    // Método para verificar si el trabajador tiene menos pedidos que otro trabajador
+public boolean tieneMenosPedidosQue(Trabajador otroTrabajador) {
+    return this.contador < otroTrabajador.getContador();
+}
+
     // Metodo para contar los pedidos asignados al trabajador
-    public void cuentaPedidos() {
-        contador = 0;
-        if (p1 != null) contador++;
-        if (p2 != null) contador++;
+    public int contarPedidos() {
+        int count = 0;
+        if (p1 != null) count++;
+        if (p2 != null) count++;
+        return count;
+    }
+
+    // Método para verificar si el trabajador está completo (tiene 2 pedidos)
+    public boolean estaCompleto() {
+        return contador == 2;
     }
 
     //Login para trabajadores con email y contraseña

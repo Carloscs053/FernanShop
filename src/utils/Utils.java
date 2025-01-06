@@ -1,7 +1,7 @@
 package utils;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
+
 
 public class Utils {
     //TODO estoy tocando cosas relativamente insignificantes y eso que nos vamos ahorrando en tiempo de desarrollo
@@ -28,14 +28,6 @@ public class Utils {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-
-    //TODO métodos que deben ir a sus respectivas clases??
-    //Metodo para validar un email utilizando una expresión regular
-    //he buscado validar email en internet y con ayuda de mni hermano lo he puesto asi
-    public static boolean validaEmail(String email) {
-        return Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$").matcher(email).matches();
     }
 
     // Metodo para validar una clave con ciertas condiciones

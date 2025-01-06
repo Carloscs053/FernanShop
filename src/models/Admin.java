@@ -22,31 +22,18 @@ public class Admin {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getClave() {
         return clave;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-
     //Otros métodos
     public boolean loginAdmin(String email, String clave) {
         //lo he simplificado ya que si no se cumple una de las dos da falso
-        return ((/*this.nombre.equals(nombre) || */this.email.equals(email)) && this.clave.equals(clave)) ;
+        return ((this.email.equals(email)) && this.clave.equals(clave)) ;
     }
 
     public boolean altaTrabajador(Trabajador trabajador) {
@@ -55,11 +42,11 @@ public class Admin {
             return true;
         }
         if (trabajador2 == null) {
-            trabajador1 = trabajador;
+            trabajador2 = trabajador;
             return true;
         }
         if (trabajador3 == null) {
-            trabajador1 = trabajador;
+            trabajador3 = trabajador;
             return true;
         }
         return false;
@@ -81,11 +68,13 @@ public class Admin {
         return false;
     }
 
-    public void añadeTrabajador(Trabajador trabajador) {
+    public void creaTrabajador(Trabajador trabajador) {
         //voy a añadir un trabajador que me pasen por parametros desde el menu con el metodo altaTrabajador
         //y lo añado a la lista de trabajadores
         altaTrabajador(trabajador);
     }
+
+
 
     //toString
     @Override

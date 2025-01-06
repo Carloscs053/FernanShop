@@ -72,7 +72,7 @@ public class Menus {
                     6.- Modificar mis datos personales
                     7.- Cerrar sesión
                     
-                    Seleccione una opción:\s""", trabajador.getNombre(), trabajador.getContador());
+                    Seleccione una opción:\s""", trabajador.getNombre(), trabajador.contarPedidos());
             opTrabajador = s.nextLine();
             switch (opTrabajador) {
                 case "1":
@@ -242,7 +242,7 @@ public class Menus {
     }
 
     // Método auxiliar para verificar si una cadena contiene solo dígitos
-    private static boolean esDigito(String diaRetraso){
+    private static boolean esDigito(String diaRetraso) {
         for (int i = 0; i < diaRetraso.length(); i++) {
             char c = diaRetraso.charAt(i);
             if (!Character.isDigit(c)) {
@@ -392,67 +392,234 @@ public class Menus {
     }
 
     // Menú para el administrador
-    public static void menuAdmin(Admin admin/*, Pedido pedido*/) {
+    public static void menuAdmin(Tienda tienda) {
         Utils.limpiaPantalla();
         var s = new Scanner(System.in);
         String opAdmin;
         // Mostrar el menú del administrador
-        System.out.printf("""
-                FERNANSHOP
-                Bienvenido %s. Tiene 2 pedido por asignar.
-                1.- Asignar un pedido a un trabajador
-                2.- Modificar el estad de un pedido
-                3.- Dar de alta un trabajador
-                4.- Ver todos los pedidos
-                5.- Ver todos los clientes
-                6.- Ver todos los trabajadores
-                7.- Cerrar sesión
-                \n
-                Seleccione una opcion:\s""", admin.getNombre());
-        opAdmin = s.nextLine();
-        switch (opAdmin) {
-            case "1":
-                menuAsignaPedido();
-                break;
-            case "2":
-                //menuEstado(admin);
-                break;
-            case "3":
-                altaTrabajador(admin);
-                break;
-            case "4":
-                // verPedidos();
-                break;
-            case "5":
-                // verClientes();
-                break;
-            case "6":
-                // verTrabajadores();
-                break;
-            case "7":
-                // Cerrar sesión
-                System.out.println("Cerrando sesión...");
-                Utils.pulseParaContinuar();
-                Utils.limpiaPantalla();
-                break;
-            default:
-                // Opción no válida
-                System.out.println("Opción no válida. Intente de nuevo.");
-                Utils.pulseParaContinuar();
-                Utils.limpiaPantalla();
-        }
+        do {
+            System.out.printf("""
+                    FERNANSHOP
+                    Bienvenido %s. Tiene %d pedido por asignar.
+                    1.- Asignar un pedido a un trabajador
+                    2.- Modificar el estad de un pedido
+                    3.- Dar de alta un trabajador
+                    4.- Ver todos los pedidos
+                    5.- Ver todos los clientes
+                    6.- Ver todos los trabajadores
+                    7.- Cerrar sesión
+                    \n
+                    Seleccione una opcion:\s""", tienda.getAdmin().getNombre(), tienda.calcularPedidosNoAsignados());
+            opAdmin = s.nextLine();
+            switch (opAdmin) {
+                case "1":
+                    menuAsignaPedido(tienda);
+                    break;
+                case "2":
+                    //menuEstado(admin);
+                    break;
+                case "3":
+                    altaTrabajador(tienda.getAdmin());
+                    break;
+                case "4":
+                    // verPedidos();
+                    break;
+                case "5":
+                    // verClientes();
+                    break;
+                case "6":
+                    // verTrabajadores();
+                    break;
+                case "7":
+                    // Cerrar sesión
+                    System.out.println("Cerrando sesión...");
+                    Utils.pulseParaContinuar();
+                    Utils.limpiaPantalla();
+                    break;
+                default:
+                    // Opción no válida
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    Utils.pulseParaContinuar();
+                    Utils.limpiaPantalla();
+            }
+        } while (!opAdmin.equals("7"));
     }
 
     // Menú para asignar un pedido a un trabajador
-    public static void menuAsignaPedido() {
-        System.out.printf("""
-                ==== Asignación del pedido %d  ====
-                1. %s - %d pedido en proceso
-                2. %s - %d pedidos en proceso
-                Seleccione el trabajador:\s""");
+    public static void menuAsignaPedido(Tienda tienda) {
+        Scanner s = new Scanner(System.in);
+
+        // Listar todos los pedidos y mostrar si están asignados o no
+        System.out.println("==== Pedidos ====");
+        mostrarPedido(tienda, 1);
+        mostrarPedido(tienda, 2);
+        mostrarPedido(tienda, 3);
+        mostrarPedido(tienda, 4);
+
+        // Pedir al administrador que seleccione un pedido
+        System.out.print("Seleccione el número del pedido que desea asignar: ");
+        int seleccionPedido = s.nextInt();
+        s.nextLine(); // Consumir el salto de línea
+
+        Pedido pedidoSeleccionado = null;
+        switch (seleccionPedido) {
+            case 1:
+                pedidoSeleccionado = tienda.getPedido1();
+                break;
+            case 2:
+                pedidoSeleccionado = tienda.getPedido2();
+                break;
+            case 3:
+                pedidoSeleccionado = tienda.getPedido3();
+                break;
+            case 4:
+                pedidoSeleccionado = tienda.getPedido4();
+                break;
+            default:
+                System.out.println("Selección no válida.");
+                return;
+        }
+
+        if (pedidoSeleccionado == null) {
+            System.out.println("Selección no válida.");
+            return;
+        }
+
+        if (pedidoSeleccionado.getTrabajador() != null) {
+            System.out.println("El pedido ya está asignado al trabajador: " + pedidoSeleccionado.getTrabajador().getNombre());
+            return;
+        }
+
+        // Verificar si todos los trabajadores tienen el mismo número de pedidos
+        Trabajador t1 = tienda.getTrabajador1();
+        Trabajador t2 = tienda.getTrabajador2();
+        Trabajador t3 = tienda.getTrabajador3();
+
+        if (t1 != null && t2 != null && t3 != null) {
+            if (t1.contarPedidos() == t2.contarPedidos() && t2.contarPedidos() == t3.contarPedidos()) {
+                // Asignación manual
+                System.out.println("Todos los trabajadores tienen el mismo número de pedidos. Seleccione manualmente el trabajador.");
+                asignarPedidoManualmente(tienda, pedidoSeleccionado);
+            } else {
+                // Intentar asignación automática
+                boolean asignado = pedidoSeleccionado.asignarAutomaticamente(tienda);
+                if (asignado) {
+                    System.out.println("Pedido asignado automáticamente.");
+                } else {
+                    asignarPedidoManualmente(tienda, pedidoSeleccionado);
+                }
+            }
+        } else {
+            // Asignación manual
+            asignarPedidoManualmente(tienda, pedidoSeleccionado);
+        }
+
+        // Verificar si hay un trabajador con menos pedidos que los demás y asignar automáticamente el siguiente pedido
+        boolean siguienteAsignado = Pedido.asignarSiguientePedidoAutomaticamente(tienda);
+        if (siguienteAsignado) {
+            System.out.println("El siguiente pedido ha sido asignado automáticamente al trabajador con menos pedidos.");
+        }
     }
 
-    // Método para dar de alta un trabajador
+    private static void asignarPedidoManualmente(Tienda tienda, Pedido pedido) {
+        Scanner s = new Scanner(System.in);
+        Trabajador t1 = tienda.getTrabajador1();
+        Trabajador t2 = tienda.getTrabajador2();
+        Trabajador t3 = tienda.getTrabajador3();
+
+        if (t1 != null && t2 != null && t3 != null) {
+            System.out.printf("Seleccione el trabajador (1 para %s, 2 para %s, 3 para %s): ", t1.getNombre(), t2.getNombre(), t3.getNombre());
+            int seleccionTrabajador = s.nextInt();
+
+            boolean asignado = pedido.asignarManualmente(tienda, seleccionTrabajador);
+            if (asignado) {
+                System.out.println("Pedido asignado correctamente al trabajador.");
+            } else {
+                System.out.println("Selección no válida o el trabajador no puede aceptar más pedidos.");
+            }
+        } else if (t1 != null && t2 != null) {
+            System.out.printf("Seleccione el trabajador (1 para %s, 2 para %s): ", t1.getNombre(), t2.getNombre());
+            int seleccionTrabajador = s.nextInt();
+
+            boolean asignado = pedido.asignarManualmente(tienda, seleccionTrabajador);
+            if (asignado) {
+                System.out.println("Pedido asignado correctamente al trabajador.");
+            } else {
+                System.out.println("Selección no válida o el trabajador no puede aceptar más pedidos.");
+            }
+        } else if (t1 != null) {
+            System.out.printf("Seleccione el trabajador (1 para %s): ", t1.getNombre());
+            int seleccionTrabajador = s.nextInt();
+
+            boolean asignado = pedido.asignarManualmente(tienda, 1);
+            if (asignado) {
+                System.out.println("Pedido asignado correctamente al trabajador: " + t1.getNombre());
+            } else {
+                System.out.println("El trabajador no puede aceptar más pedidos.");
+            }
+        } else if (t2 != null) {
+            System.out.printf("Seleccione el trabajador (2 para %s): ", t2.getNombre());
+            int seleccionTrabajador = s.nextInt();
+
+            boolean asignado = pedido.asignarManualmente(tienda, 2);
+            if (asignado) {
+                System.out.println("Pedido asignado correctamente al trabajador: " + t2.getNombre());
+            } else {
+                System.out.println("El trabajador no puede aceptar más pedidos.");
+            }
+        } else if (t3 != null) {
+            System.out.printf("Seleccione el trabajador (3 para %s): ", t3.getNombre());
+            int seleccionTrabajador = s.nextInt();
+
+            boolean asignado = pedido.asignarManualmente(tienda, 3);
+            if (asignado) {
+                System.out.println("Pedido asignado correctamente al trabajador: " + t3.getNombre());
+            } else {
+                System.out.println("El trabajador no puede aceptar más pedidos.");
+            }
+        } else {
+            System.out.println("No hay trabajadores disponibles para asignar el pedido.");
+        }
+    }
+
+    private static void mostrarPedido(Tienda tienda, int numero) {
+        Pedido pedido = switch (numero) {
+            case 1 -> tienda.getPedido1();
+            case 2 -> tienda.getPedido2();
+            case 3 -> tienda.getPedido3();
+            case 4 -> tienda.getPedido4();
+            default -> null;
+        };
+
+        if (pedido != null) {
+            if (pedido.getTrabajador() == null) {
+                System.out.printf("%d. %s - %s %s (%s) - %s - %.2f\n",
+                        numero,
+                        pedido.getCodigo(),
+                        pedido.getCliente().getNombre(),
+                        pedido.getCliente().getApellido(),
+                        pedido.getCliente().getProvincia(),
+                        (pedido.getCantidadProductos() < 2) ?
+                                pedido.getCantidadProductos() + " Producto"
+                                : pedido.getCantidadProductos() + " Productos",
+                        pedido.getTotal());
+            } else {
+                System.out.printf("%d. %s - %s %s (%s) - %s - %.2f - Asignado a: %s\n",
+                        numero,
+                        pedido.getCodigo(),
+                        pedido.getCliente().getNombre(),
+                        pedido.getCliente().getApellido(),
+                        pedido.getCliente().getProvincia(),
+                        (pedido.getCantidadProductos() < 2) ?
+                                pedido.getCantidadProductos() + " Producto"
+                                : pedido.getCantidadProductos() + " Productos",
+                        pedido.getTotal(),
+                        pedido.getTrabajador().getNombre());
+            }
+        }
+    }
+
+    // Metodo para dar de alta un trabajador
     public static void altaTrabajador(Admin admin) {
         Scanner s = new Scanner(System.in);
 

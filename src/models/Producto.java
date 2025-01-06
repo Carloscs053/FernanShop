@@ -3,14 +3,13 @@ package models;
 import data.ProductosData;
 
 public class Producto {
-
-    //Atributos
+    // Atributos
     private String codigo;
     private String nombre;
     private int stock;
     private double precio;
 
-    //Constructor
+    // Constructor
     public Producto(String codigo, String nombre, int stock, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -18,15 +17,15 @@ public class Producto {
         this.precio = precio;
     }
 
-    //Constructor copia
+    // Constructor copia
     public Producto(Producto producto) {
-        codigo = producto.codigo;
-        nombre = producto.nombre;
-        stock = producto.stock;
-        precio = producto.precio;
+        this.codigo = producto.codigo;
+        this.nombre = producto.nombre;
+        this.stock = producto.stock;
+        this.precio = producto.precio;
     }
 
-    //Getters y Setters
+    // Getters y Setters
     public String getCodigo() {
         return codigo;
     }
@@ -59,7 +58,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    //Otros métodos
+    // Otros métodos
     public boolean reducirStock(int cantidad) {
         if (cantidad < 0 || cantidad > stock) return false;
         stock -= cantidad;
@@ -72,12 +71,22 @@ public class Producto {
         return true;
     }
 
-    //pintar un producto
+    // Comprobar si hay stock
+    public boolean hayStock(int cantidad) {
+        return cantidad <= stock;
+    }
+
+    // Pintar un producto para el admin y trabajador de forma estética
+    public String pintaDatosProducto() {
+        return "Código: " + codigo + "\nNombre: " + nombre + "\nStock: " + stock + "\nPrecio: " + precio + " Euros\n";
+    }
+
+    // Pintar un producto
     public String pintaProducto() {
         return nombre + String.format(": %.2f", precio) + " Euros\n";
     }
 
-    //Modificar un producto
+    // Modificar un producto
     public void modificarProducto(String nuevoNombre, Double nuevoPrecio, Integer nuevoStock) {
         if (nuevoNombre != null && !nuevoNombre.isEmpty()) {
             this.nombre = nuevoNombre;
@@ -90,13 +99,13 @@ public class Producto {
         }
     }
 
-    //toString
+    // toString
     @Override
     public String toString() {
         return "Producto{" +
-                "nombre ='" + nombre + '\'' +
-                ", stock =" + stock +
-                ", precio =" + precio +
+                "nombre='" + nombre + '\'' +
+                ", stock=" + stock +
+                ", precio=" + precio +
                 '}';
     }
 }

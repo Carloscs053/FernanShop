@@ -41,7 +41,7 @@ public class MainFernanShop {
                 ██╔══╝  ██╔══╝  ██╔══██╗██║╚██╗██║██╔══██║██║╚██╗██║╚════██║██╔══██║██║   ██║██╔═══╝
                 ██║     ███████╗██║  ██║██║ ╚████║██║  ██║██║ ╚████║███████║██║  ██║╚██████╔╝██║
                 ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝
-                                
+                
                 """);
         while (true) {
             // Solicitar al usuario que seleccione una opción
@@ -64,11 +64,12 @@ public class MainFernanShop {
                     //Trabajador tempTrabajador = tienda.loginTrabajador(email, clave);
 
                     //Comprueba si es el admin
-                    if (admin.loginAdmin(email, clave)) {
+                    if (tienda.getAdmin().loginAdmin(email, clave)) {
                         logueado = true;
                         Utils.limpiaPantalla();
                         //Esto va dentro de un do-while y con un switch
-                        Menus.menuAdmin(admin);
+                        Menus.menuAdmin(tienda);
+
                     } else {
                         //Si no, comprueba si es un trabajador
                         Trabajador tempTrabajador = tienda.loginTrabajador(email, clave);
@@ -77,79 +78,83 @@ public class MainFernanShop {
                             Utils.limpiaPantalla();
                             //Do-while (preguntar por las variables
                             Menus.menuTrabajador(tempTrabajador, productosData, tienda);
-                        } else {
-                            //Si no lo es, comprueba si es un cliente
-                            Cliente tempCliente = tienda.loginCliente(email, clave);
-                            if (tempCliente != null) {
+                            if (tempTrabajador != null) {
                                 logueado = true;
                                 Utils.limpiaPantalla();
-                                //Do-while
-                                String opCliente = "", opProducto = "";
-                                do {
-                                    Menus.menuCliente(tempCliente);
-                                    opCliente = s.nextLine();
-
-                                    switch (opCliente) {
-                                        case "1":
-                                            //Aquí pinta el catálogo
-                                            System.out.println(tienda.pintaCatalogo());
-                                            Utils.pulseParaContinuar();
-                                            break;
-                                        case "2":
-                                            //Aquí puede realizar el pedido
-                                            System.out.println(tienda.pintaCatalogo());
-                                            System.out.println();
-                                            System.out.println("6. Realizar pedido");
-                                            System.out.println("7. Cancelar pedido");
-                                            do {
-                                                switch (opProducto) {
-
-                                                }
-                                            } while (!opProducto.equals("7"));
-
-                                            //realizaPedido();
-                                            break;
-                                        case "3":
-                                            //Aquí comprueba los pedidos del usuario
-                                            //verPedidos();
-                                            break;
-                                        case "4":
-                                            //Muestra los datos del usuario
-                                            //verPerfil();
-                                            break;
-                                        case "5":
-                                            //Modifica los datos del usuario si este así lo quiere
-                                            //cliente.modificarDatos();
-                                            break;
-                                        case "6":
-                                            //Sale de la sesión del usuario
-                                            System.out.println("Hasta pronto!");
-                                            Utils.pulseParaContinuar();
-                                            Utils.limpiaPantalla();
-                                            break;
-                                        default:
-                                            System.out.println("Opción no válida");
-                                            break;
-                                    }
-                                } while (!opCliente.equals("6"));
+                                //Do-while (preguntar por las variables
+                                Menus.menuTrabajador(tempTrabajador, productosData, tienda);
                             } else {
-                                //Si no es nada de lo anterior, las credenciales no son correctas
-                                System.out.println("Email y/o contraseña incorrectas");
+                                //Si no lo es, comprueba si es un cliente
+                                Cliente tempCliente = tienda.loginCliente(email, clave);
+                                if (tempCliente != null) {
+                                    logueado = true;
+                                    Utils.limpiaPantalla();
+                                    //Do-while
+                                    String opCliente = "", opProducto = "";
+                                    do {
+                                        Menus.menuCliente(tempCliente);
+                                        opCliente = s.nextLine();
+
+                                        switch (opCliente) {
+                                            case "1":
+                                                //Aquí pinta el catálogo
+                                                System.out.println(tienda.pintaCatalogo());
+                                                Utils.pulseParaContinuar();
+                                                break;
+                                            case "2":
+                                                //Aquí puede realizar el pedido
+                                                System.out.println(tienda.pintaCatalogo());
+                                                System.out.println();
+                                                System.out.println("6. Realizar pedido");
+                                                System.out.println("7. Cancelar pedido");
+                                                do {
+                                                    switch (opProducto) {
+
+                                                    }
+                                                } while (!opProducto.equals("7"));
+
+                                                //realizaPedido();
+                                                break;
+                                            case "3":
+                                                //Aquí comprueba los pedidos del usuario
+                                                //verPedidos();
+                                                break;
+                                            case "4":
+                                                //Muestra los datos del usuario
+                                                //verPerfil();
+                                                break;
+                                            case "5":
+                                                //Modifica los datos del usuario si este así lo quiere
+                                                //cliente.modificarDatos();
+                                                break;
+                                            case "6":
+                                                //Sale de la sesión del usuario
+                                                System.out.println("Hasta pronto!");
+                                                Utils.pulseParaContinuar();
+                                                Utils.limpiaPantalla();
+                                                break;
+                                            default:
+                                                System.out.println("Opción no válida");
+                                                break;
+                                        }
+                                    } while (!opCliente.equals("6"));
+                                } else {
+                                    //Si no es nada de lo anterior, las credenciales no son correctas
+                                    System.out.println("Email y/o contraseña incorrectas");
+                                }
                             }
                         }
+                        break;
+
+                        case "2":
+                            // Solicitar al usuario que se registre llamando a un metodo
+                            Menus.menuRegistro();
+                            break;
+                        default:
+                            // Mostrar mensaje de error si la opción no es válida
+                            System.out.println("Opción no válida. Intente de nuevo.");
+                            break;
                     }
-                    break;
-
-                case "2":
-                    // Solicitar al usuario que se registre llamando a un metodo
-                    Menus.menuRegistro();
-                    break;
-
-
-                default:
-                    // Mostrar mensaje de error si la opción no es válida
-                    System.out.println("Opción no válida. Intente de nuevo.");
-                    break;
             }
         }
     }
