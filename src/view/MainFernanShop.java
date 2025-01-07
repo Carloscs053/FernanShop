@@ -233,7 +233,7 @@ public class MainFernanShop {
                                             break;
                                         case "4":
                                             //Muestra los datos del usuario
-                                            tempCliente.verCliente();
+                                            System.out.println(tempCliente.verCliente());
                                             Utils.pulseParaContinuar();
                                             Utils.limpiaPantalla();
                                             break;
