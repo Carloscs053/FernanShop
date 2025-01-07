@@ -256,7 +256,7 @@ public class Cliente {
         salida += "Apellido" + apellido + "\n";
         salida += "Email: " + email + "\n";
         salida += "Teléfono: " + telefono + "\n";
-        salida += "Dirección" + direccion + ", " + localidad + "(" + provincia + ")" + "\n";
+        salida += "Dirección: " + direccion + ", " + localidad + "(" + provincia + ")" + "\n";
         salida += "==========================\n";
         return salida;
     }
