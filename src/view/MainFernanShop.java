@@ -240,7 +240,7 @@ public class MainFernanShop {
                                         case "5":
                                             //Modifica los datos del usuario si este así lo quiere
                                             do {
-                                                tempCliente.verCliente();
+                                                System.out.println(tempCliente.verCliente());
                                                 System.out.println();
                                                 Menus.modificaCliente();
                                                 opModifica = s.nextLine();
