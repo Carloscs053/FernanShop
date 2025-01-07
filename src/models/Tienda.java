@@ -196,22 +196,66 @@ public class Tienda {
     }
 
     public String pintaCatalogo() {
-                String catalogo = "";
-                catalogo += ((producto1 != null) ? "1. " + producto1.pintaProducto() : "\n"); //Lama a los pintaProducto
-                catalogo += ((producto2 != null) ? "2. " + producto2.pintaProducto() : "\n");
-                catalogo += ((producto3 != null) ? "3. " + producto3.pintaProducto() : "\n");
-                catalogo += ((producto4 != null) ? "4. " + producto4.pintaProducto() : "\n");
-                catalogo += ((producto5 != null) ? "5. " + producto5.pintaProducto() : "\n");
-                return catalogo;
-            }
+        String catalogo = "";
+        catalogo += ((producto1 != null) ? "1. " + producto1.pintaProducto() : "\n"); //Lama a los pintaProducto
+        catalogo += ((producto2 != null) ? "2. " + producto2.pintaProducto() : "\n");
+        catalogo += ((producto3 != null) ? "3. " + producto3.pintaProducto() : "\n");
+        catalogo += ((producto4 != null) ? "4. " + producto4.pintaProducto() : "\n");
+        catalogo += ((producto5 != null) ? "5. " + producto5.pintaProducto() : "\n");
+        return catalogo;
+    }
 
     // Método para comprobar si existe un producto con un código determinado
     public boolean existeCodigoProducto(String codigo) {
         return (producto1 != null && producto1.getCodigo().equalsIgnoreCase(codigo)) ||
-               (producto2 != null && producto2.getCodigo().equalsIgnoreCase(codigo)) ||
-               (producto3 != null && producto3.getCodigo().equalsIgnoreCase(codigo)) ||
-               (producto4 != null && producto4.getCodigo().equalsIgnoreCase(codigo)) ||
-               (producto5 != null && producto5.getCodigo().equalsIgnoreCase(codigo));
+                (producto2 != null && producto2.getCodigo().equalsIgnoreCase(codigo)) ||
+                (producto3 != null && producto3.getCodigo().equalsIgnoreCase(codigo)) ||
+                (producto4 != null && producto4.getCodigo().equalsIgnoreCase(codigo)) ||
+                (producto5 != null && producto5.getCodigo().equalsIgnoreCase(codigo));
+    }
+
+
+    //Método que comprueba si todos los slots de clientes están ocupados
+    public boolean registrosLlenos() {
+        if (cliente1 != null && cliente2 != null) return true;
+        return false;
+    }
+
+
+    public boolean registraCliente(String nombre, String apellido, String direccion, String localidad, String provincia,
+                                   String email, String telefono, String clave) {
+        if (registrosLlenos()) return false;
+        else {
+            if (cliente1 == null) {
+                if (!cliente1.validaEmail(email)) {
+                    System.out.println("Email no permitido.");
+                    return false;
+                } else if (cliente1.validaTelefono(telefono)) {
+                    System.out.println("Teléfono no permitido");
+                    return false;
+                } else {
+                    if (cliente1.validaEmail(email) && cliente1.validaTelefono(telefono)) {
+                        cliente1 = new Cliente(nombre, apellido, direccion, localidad, provincia, email, telefono, clave);
+                        return true;
+                    }
+                }
+            }
+            if (cliente1 != null && cliente2 == null) {
+                cliente2 = new Cliente(nombre, apellido, direccion, localidad, provincia, email, telefono, clave);
+                if (!cliente2.validaEmail(email)) {
+                    System.out.println("Email no permitido.");
+                    cliente2 = null;
+                    return false;
+                } else if (!cliente2.validaTelefono(telefono)) {
+                    System.out.println("Teléfono no permitido");
+                    cliente2 = null;
+                    return false;
+                } else {
+                    return cliente2.validaEmail(email) && cliente2.validaTelefono(telefono);
+                }
+            }
+        }
+        return false;
     }
 
     // Método que calcula los pedidos que no están asignados

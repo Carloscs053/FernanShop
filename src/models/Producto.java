@@ -6,6 +6,7 @@ public class Producto {
     // Atributos
     private String codigo;
     private String nombre;
+    private int cantidadPedido;
     private int stock;
     private double precio;
 
@@ -13,6 +14,7 @@ public class Producto {
     public Producto(String codigo, String nombre, int stock, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.cantidadPedido = 0;
         this.stock = stock;
         this.precio = precio;
     }
@@ -40,6 +42,14 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getCantidadPedido() {
+        return cantidadPedido;
+    }
+
+    public void setCantidadPedido(int cantidadPedido) {
+        this.cantidadPedido = cantidadPedido;
     }
 
     public int getStock() {

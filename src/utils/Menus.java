@@ -29,28 +29,17 @@ public class Menus {
                 6.- Cerrar sesión
                 \n
                 Seleccione una opcion:\s""", cliente.getNombre());
-        /*opCliente = s.nextLine();
-        switch (opCliente) {
-            case "1":
-                //verCatalogo();
-                break;
-            case "2":
-                //realizarPedido();
-                break;
-            case "3":
-                //verPedidos();
-                break;
-            case "4":
-                //verPerfil();
-                break;
-            case "5":
-                //cliente.modificarDatos();
-                break;
-            case "6":
-                break;
-            default:
-                break;
-        }*/
+    }
+
+    public static void modificaCliente() {
+        System.out.println("""
+                ¿Qué campo desea modificar?
+                1. Nombre
+                2. Apellido
+                3. Email
+                4. Teléfono
+                5. Dirección
+                6. Volver al menú principal""");
     }
 
     // Menú para el trabajador
