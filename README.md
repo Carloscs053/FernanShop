@@ -142,4 +142,84 @@ Abrimos la carpeta ya extraidas y abrimos el ejecutable "FernanShop" que se mues
 
   ![image](https://github.com/user-attachments/assets/2c95b70a-9776-4556-94b9-ff32a07d8fae)
 
-  
+  En la opción 4, podremos ver los datos del usuario
+
+  ![image](https://github.com/user-attachments/assets/79608f96-1a81-42f0-8f12-06727b824a99)
+
+  En la opción 5, podremos modificar los datos del cliente
+
+  ![image](https://github.com/user-attachments/assets/a6956e63-2ceb-41eb-b6af-7fdd4153d4f8)
+
+
+- MENÚ TRABAJADOR
+
+  Las opciones en el menú del trabajador son las siguientes:
+
+  ![image](https://github.com/user-attachments/assets/c11477e4-d9ec-49c0-afbe-182bf1189cc2)
+
+  En la opción 1, aparece los pedidos pendientes
+
+  ![image](https://github.com/user-attachments/assets/a4d6a67b-86d2-498f-9f4e-e262a7e18d45)
+
+  En la segunda opción, podemos modificar un pedido y podremos llegar a él a través del código del pedido
+
+  ![image](https://github.com/user-attachments/assets/564e62f8-5994-4390-a0a5-39189a33d06e)
+
+  En la opción 3, podremos consultar el catálogo
+
+  ![image](https://github.com/user-attachments/assets/4ace8d6f-ae6b-4ebc-b32a-9d38307e47f1)
+
+  En la opción 4, podemos modificar los datos de un producto
+
+  ![image](https://github.com/user-attachments/assets/485ef742-8eed-49cf-9624-872f5f182faa)
+
+  ![image](https://github.com/user-attachments/assets/d81e53fc-f6e7-45d4-9ad5-58b24a1f106a)
+
+  En el apartado 5, nos mostrará los datos el trabajador
+
+  ![image](https://github.com/user-attachments/assets/a1093961-94be-44d4-997d-3dab993847a1)
+
+  En el apartado 6 cambiaremos algunos de los datos del trabajador
+
+  ![image](https://github.com/user-attachments/assets/6ec22a6c-5d1f-4e0e-b28e-3074358d749f)
+
+
+- MENÚ ADMINISTRADOR
+  A contunación, mostraré el menú del administrador
+
+  ![image](https://github.com/user-attachments/assets/cc374cc8-226e-4dd6-8572-816a4f263132)
+
+  En el apartado 1 nos indicará los pedidos pendientes de asignar y nos permitirá asignarselo a un trabajador
+
+  ![image](https://github.com/user-attachments/assets/b09378dc-8015-48d8-91bb-84521fc4fe4c)
+
+  ![image](https://github.com/user-attachments/assets/4f8a8978-2a37-472a-a14c-87e4fd39e60b)
+
+  En el apartado 2, al igual que en el trabajador, podremos modificar el estado de un pedido
+
+  ![image](https://github.com/user-attachments/assets/943cb041-e7fe-4773-8185-776df6eaed25)
+
+  ![image](https://github.com/user-attachments/assets/ad6cecd2-dbb7-4a68-8d50-7004badfe88b)
+
+  Como vemos, para pasar de un punto a otro lo tiene que hacer de forma ordenada y nos permitirá poner los días de retraso y un comentario al pedido
+
+  ![image](https://github.com/user-attachments/assets/68141d2d-b14c-4466-979c-cbdfcd47ee78)
+
+  En el apartado 4 podremos ver los pedidos que hay pendientes
+
+  ![image](https://github.com/user-attachments/assets/56d074a6-5e1d-4116-b629-3215275053d7)
+
+  En el apartado 5 veremos los clientes
+
+  ![image](https://github.com/user-attachments/assets/8075c593-d845-4208-8f41-fa4eaa2e60a7)
+
+  Y en el apartado 6 veremos a los trabajadores
+
+  ![image](https://github.com/user-attachments/assets/eaa260c6-dd81-4957-a387-2a532f3198fa)
+
+
+
+# COLABORADORES
+Este proyecto ha sido realizado por:
+    - Carlos Cañada Sánchez: https://github.com/Carloscs053
+    - Eduardo Cruz Muñoz: https://github.com/EduardoCruzmunioz
