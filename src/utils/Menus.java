@@ -43,7 +43,6 @@ public class Menus {
 
     // Menú para el trabajador
     public static void menuTrabajador(Trabajador trabajador, ProductosData productosData, Tienda tienda) {
-        Utils.cargandoPantalla();
         Utils.limpiaPantalla();
         
             // Mostrar el menú del trabajador
@@ -323,6 +322,13 @@ public class Menus {
     public static void menuRegistro(Tienda tienda) {
         Scanner s = new Scanner(System.in);
         System.out.println("==== Registro de un nuevo cliente ====");
+
+        // Comprobar si hay espacio para un nuevo cliente
+        if (tienda.getCliente1() != null && tienda.getCliente2() != null) {
+            System.out.println("Error: No se puede registrar un nuevo cliente. La tienda ya tiene el máximo de clientes. en próximas actualizaciones solucionaremos este error");
+            return;
+        }
+
         System.out.print("Ingrese su nombre: ");
         String nombre = s.nextLine();
         System.out.print("Ingrese su apellido: ");
@@ -360,15 +366,16 @@ public class Menus {
         }
 
         // Crear una nueva instancia de Cliente
-        Cliente nuevoCliente = new Cliente(nombre, apellido, direccion, ciudad, provincia, telefono, email, clave);
+        Cliente cliente = new Cliente(nombre, apellido, direccion, ciudad, provincia, telefono, email, clave);
 
         // Añadir el cliente a la tienda
-        if (tienda.altaCliente(nuevoCliente)) {
+        if (tienda.altaCliente(cliente)) {
             System.out.println("Cliente registrado exitosamente.");
         } else {
             System.out.println("Error: No se pudo registrar el cliente. La tienda ya tiene el máximo de clientes.");
         }
     }
+    
 
     // Menú para el administrador
     public static void menuAdmin(Tienda tienda) {

@@ -338,6 +338,7 @@ public class Pedido {
     }
 
     private String generarCodigoAleatorio() {
+    
         contadorCodigo++;
         String inicialesCliente = cliente.getNombre().charAt(0) + cliente.getApellido().charAt(0) + "";
         String localidad = cliente.getLocalidad().substring(0, Math.min(3, cliente.getLocalidad().length())).toUpperCase();

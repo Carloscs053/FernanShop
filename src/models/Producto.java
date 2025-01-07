@@ -116,6 +116,7 @@ public class Producto {
                 "nombre='" + nombre + '\'' +
                 ", stock=" + stock +
                 ", precio=" + precio +
+                ",codigo" + codigo +
                 '}';
     }
 }

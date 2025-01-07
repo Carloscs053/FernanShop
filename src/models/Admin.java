@@ -69,8 +69,6 @@ public class Admin {
     }
 
     public void creaTrabajador(Trabajador trabajador) {
-        //voy a añadir un trabajador que me pasen por parametros desde el menu con el metodo altaTrabajador
-        //y lo añado a la lista de trabajadores
         altaTrabajador(trabajador);
     }
 

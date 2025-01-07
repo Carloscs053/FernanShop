@@ -151,6 +151,7 @@ public class Cliente {
 
     //Método para realizar un pedido
     public boolean realizaPedido(String opProducto, int cantidad) {
+    
         if (pedido1 == null) {
             pedido1 = new Pedido();
             if (pedido1.getP1() == null) {

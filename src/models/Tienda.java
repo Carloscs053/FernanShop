@@ -122,11 +122,11 @@ public class Tienda {
     // MOCK de prueba
     public void mock() {
         this.admin = new Admin("admin", "admin", "1234");
-        this.cliente1 = null;
+        this.cliente1 = ClientesData.cliente1;
         this.cliente2 = ClientesData.cliente2;
         this.trabajador1 = TrabajadoresData.trabajador1;
         this.trabajador2 = TrabajadoresData.trabajador2;
-        this.trabajador3 = TrabajadoresData.trabajador3;
+
 
         // Inicializar productos
         this.producto1 = ProductosData.Producto1;
@@ -136,8 +136,6 @@ public class Tienda {
         this.producto5 = ProductosData.Producto5;
 
         // Inicializar pedidos
-        this.pedido1 = null;
-        this.pedido2 = null;
         this.pedido3 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
         this.pedido4 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
     }
@@ -154,6 +152,7 @@ public class Tienda {
         }
         return false;
     }
+
 
     public Admin loginAdmin(String email, String clave) {
         if (admin != null && admin.loginAdmin(email, clave)) return admin;
@@ -187,19 +186,19 @@ public class Tienda {
     }
 
     // Metodo para generar el catálogo de productos
-    public String verCatalogo() {
+    public String verCatalogo(ProductosData productosData) {
         String catalogo = "";
-        catalogo += ((producto1 != null) ? producto1.pintaProducto() : "") + "\n";
-        catalogo += ((producto2 != null) ? producto2.pintaProducto() : "") + "\n";
-        catalogo += ((producto3 != null) ? producto3.pintaProducto() : "") + "\n";
-        catalogo += ((producto4 != null) ? producto4.pintaProducto() : "") + "\n";
-        catalogo += ((producto5 != null) ? producto5.pintaProducto() : "") + "\n";
+        catalogo += ((producto1 != null) ? producto1.pintaDatosProducto() : "") + "\n";
+        catalogo += ((producto2 != null) ? producto2.pintaDatosProducto() : "") + "\n";
+        catalogo += ((producto3 != null) ? producto3.pintaDatosProducto() : "") + "\n";
+        catalogo += ((producto4 != null) ? producto4.pintaDatosProducto() : "") + "\n";
+        catalogo += ((producto5 != null) ? producto5.pintaDatosProducto() : "") + "\n";
         return catalogo;
     }
-
+    //Lama a los pintaProducto
     public String pintaCatalogo() {
         String catalogo = "";
-        catalogo += ((producto1 != null) ? "1. " + producto1.pintaProducto() : "\n"); //Lama a los pintaProducto
+        catalogo += ((producto1 != null) ? "1. " + producto1.pintaProducto() : "\n");
         catalogo += ((producto2 != null) ? "2. " + producto2.pintaProducto() : "\n");
         catalogo += ((producto3 != null) ? "3. " + producto3.pintaProducto() : "\n");
         catalogo += ((producto4 != null) ? "4. " + producto4.pintaProducto() : "\n");
