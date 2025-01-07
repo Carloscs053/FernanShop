@@ -96,10 +96,9 @@ Nos aparecerá una ventana como la siguiente:
 
 Clicamos en "Examinar..." y le indicamos la ruta que deseemos
 
-Abrimos la carpeta ya extraidas y abrimos el ejecutable "FernanShop" que se muestra seleccionado en la captura
+A continuación, en la ruta "out/artifacts/FernanShop_jar" y clicamos en el archivo llamado "FernanShop" que aparece marcado en la captura
 
-![image](https://github.com/user-attachments/assets/995df38d-5620-4272-94f6-ab3bf82be037)
-
+![image](https://github.com/user-attachments/assets/b7d02244-07e3-4b85-8586-d6a4b494d5f6)
 
 
 # MANUAL DE USUARIO 📖
