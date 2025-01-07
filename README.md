@@ -82,4 +82,64 @@ Una vez dentro, dirigase a la pesataña de Windows (si es su caso) y descargue e
 # DESCARGA 💾
 Para la descarga, primero debe ir al repositorio del proyecto, les dejamos el siguiente enlace para llegar a él.
 
+https://github.com/Carloscs053/FernanShop.git
 
+Abrimos la pesataña que pone "<> Code" y descargamos el archivo ZIP
+
+![image](https://github.com/user-attachments/assets/47caf690-87de-4c23-b744-9c102fe3da51)
+
+Vamos a la carpeta dónde se haya descargado la carpeta y con click derecho clicamos en "Extraer todo..."
+
+Nos aparecerá una ventana como la siguiente:
+
+![image](https://github.com/user-attachments/assets/10ca7b03-2cb4-4824-a3a6-22c842dcca85)
+
+Clicamos en "Examinar..." y le indicamos la ruta que deseemos
+
+Abrimos la carpeta ya extraidas y abrimos el ejecutable "FernanShop" que se muestra seleccionado en la captura
+
+![image](https://github.com/user-attachments/assets/995df38d-5620-4272-94f6-ab3bf82be037)
+
+
+
+# MANUAL DE USUARIO 📖
+- MENÚ PRINCIPAL
+  Al abrir el programa, nos dará dos opciones: Iniciar sesión y Registrarse.
+  En este caso, el registro no funcionará porque todos los usuarios están creados.
+
+![image](https://github.com/user-attachments/assets/28fdc10a-bd4d-4b25-b27c-d0d85e5f7974)
+
+- INICIO DE SESIÓN
+  A continuación, nos preguntará las credenciales:
+  ![image](https://github.com/user-attachments/assets/c5c04d8d-cb7d-40e4-af29-0c91eb22f026)
+
+- REGISTRO:
+  De lo contrario, nos pedirá los datos necesarios para crear un usuario cliente, ya que los trabajadores son dados de alta por el administrador y este a su vez ya está preestablecido.
+  
+  ![image](https://github.com/user-attachments/assets/a12b25f9-8b13-4e64-8ad7-758412cb386e)
+  
+  En este caso, al estar todos los usuarios completos, no nos registra un nuevo usuario.
+
+
+- MENÚ DE CLIENTE
+  Para acceder a un usuario Cliente, usaremos el email "Antonio@gmail.com" y la contraseña 1234.
+
+  Nos aparecerá el menú del cliente:
+
+  ![image](https://github.com/user-attachments/assets/d851739d-634b-4137-82f7-4107377226e4)
+
+  Si le damos al primer apartado, nos mostrará los productos que están disponibles
+
+  ![image](https://github.com/user-attachments/assets/7f2469b2-cd5f-4076-8b15-6fb81fc057e7)
+
+  Si le damos a la segunda opción, accedemos a la realización del pedido
+
+  ![image](https://github.com/user-attachments/assets/42419397-8ac4-4606-9903-c5fa7d43bf7f)
+
+  Y nos dejará seleccionar el producto, terminar el producto y cancelar el pedido
+
+  Si le damos a la opción 3, nos mostrará los pedidos realizados. En este caso no hay pedidos realizados pero nos mostraría los datos del pedido que ha sido realizado.
+
+  ![image](https://github.com/user-attachments/assets/2c95b70a-9776-4556-94b9-ff32a07d8fae)
+
+  
