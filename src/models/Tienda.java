@@ -268,6 +268,29 @@ public class Tienda {
         return count;
     }
 
+    public String verPedidos() {
+        String pedidos = "";
+        pedidos += ((pedido1 != null) ? getPedido1().toString() + "\n" : "\n");
+        pedidos += ((pedido2 != null) ? getPedido2().toString() + "\n" : "\n");
+        pedidos += ((pedido3 != null) ? getPedido3().toString() + "\n" : "\n");
+        pedidos += ((pedido4 != null) ? getPedido4().toString() + "\n" : "\n");
+        return pedidos;
+    }
+
+    public String verClientes() {
+        String clientes = "";
+        clientes += ((cliente1 != null) ? getCliente1().toString() + "\n" : "\n");
+        clientes += ((cliente2 != null) ? getCliente2().toString() + "\n": "\n");
+        return clientes;
+    }
+    public String verTrabajadores() {
+        String trabajadores = "";
+        trabajadores += ((trabajador1 != null) ? getTrabajador1().toString() + "\n" : "\n");
+        trabajadores += ((trabajador2 != null) ? getTrabajador2().toString() + "\n": "\n");
+        trabajadores += ((trabajador3 != null) ? getTrabajador3().toString() + "\n": "\n");
+        return trabajadores;
+    }
+
     // toString
     @Override
     public String toString() {

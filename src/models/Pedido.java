@@ -4,6 +4,7 @@ import data.ProductosData;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Pedido {
     // Atributos
@@ -352,27 +353,32 @@ public class Pedido {
     }
 
     //Admin asigna un trabajador
+    // Metodo para asignar un trabajador automáticamente
     public boolean asignarAutomaticamente(Tienda tienda) {
-        Trabajador[] trabajadores = {tienda.getTrabajador1(), tienda.getTrabajador2(), tienda.getTrabajador3()};
-        Trabajador trabajadorMenosPedidos = null;
-
-        for (Trabajador trabajador : trabajadores) {
-            if (trabajador != null && trabajador.puedeAceptarPedido()) {
-                if (trabajadorMenosPedidos == null || trabajador.contarPedidos() < trabajadorMenosPedidos.contarPedidos()) {
-                    trabajadorMenosPedidos = trabajador;
-                }
+        Trabajador trabajador1 = tienda.getTrabajador1();
+        Trabajador trabajador2 = tienda.getTrabajador2();
+        Trabajador trabajador3 = tienda.getTrabajador3();
+    
+        if (trabajador1 != null && trabajador1.puedeAceptarPedido() &&
+            trabajador2 != null && trabajador2.puedeAceptarPedido() &&
+            trabajador3 != null && trabajador3.puedeAceptarPedido()) {
+    
+            Trabajador trabajadorMenosPedidos = obtenerTrabajadorConMenosPedidos(trabajador1, trabajador2, trabajador3);
+    
+            if (trabajadorMenosPedidos != null) {
+                this.setTrabajador(trabajadorMenosPedidos);
+                trabajadorMenosPedidos.asignarPedido(this);
+                return true;
             }
         }
-
-        if (trabajadorMenosPedidos != null) {
-            trabajadorMenosPedidos.asignarPedido(this);
-            return true;
-        }
+    
         return false;
     }
 
+    // Metodo para asignar un trabajador manualmente
     public boolean asignarManualmente(Tienda tienda, int seleccionTrabajador) {
         Trabajador trabajadorSeleccionado = null;
+        
         switch (seleccionTrabajador) {
             case 1:
                 trabajadorSeleccionado = tienda.getTrabajador1();
@@ -386,14 +392,83 @@ public class Pedido {
             default:
                 return false;
         }
-
+    
         if (trabajadorSeleccionado != null && trabajadorSeleccionado.puedeAceptarPedido()) {
+            this.setTrabajador(trabajadorSeleccionado);
             trabajadorSeleccionado.asignarPedido(this);
+            trabajadorSeleccionado.setContador(trabajadorSeleccionado.contarPedidos());
             return true;
-        } else {
-            return false;
+        }
+        return false;
+    }
+
+    // Metodo para asignar pedidos automáticamente
+    public static void asignarPedidosAutomaticamente(Tienda tienda) {
+        Trabajador t1 = tienda.getTrabajador1();
+        Trabajador t2 = tienda.getTrabajador2();
+        Trabajador t3 = tienda.getTrabajador3();
+
+        if ((t1 != null && t2 != null && t3 == null) || (t1 == null && t2 != null && t3 != null) || (t1 != null && t2 == null && t3 != null)) {
+            boolean asignado;
+            do {
+                asignado = asignarSiguientePedidoAutomaticamente(tienda);
+            } while (asignado);
+        } else if (t1 != null && t2 != null && t3 != null) {
+            while (true) {
+                int pedidosT1 = t1.contarPedidos();
+                int pedidosT2 = t2.contarPedidos();
+                int pedidosT3 = t3.contarPedidos();
+
+                if (pedidosT1 == pedidosT2 && pedidosT2 == pedidosT3) {
+                    asignarPedidoManualmente(tienda);
+                    break;
+                } else if ((pedidosT1 == pedidosT2 && pedidosT1 < pedidosT3) || 
+                           (pedidosT1 == pedidosT3 && pedidosT1 < pedidosT2) || 
+                           (pedidosT2 == pedidosT3 && pedidosT2 < pedidosT1)) {
+                    asignarPedidoManualmente(tienda);
+                    break;
+                } else {
+                    Trabajador trabajadorMenosPedidos = obtenerTrabajadorConMenosPedidos(t1, t2, t3);
+                    if ((trabajadorMenosPedidos == t1 && pedidosT1 < pedidosT2 && pedidosT1 < pedidosT3) ||
+                        (trabajadorMenosPedidos == t2 && pedidosT2 < pedidosT1 && pedidosT2 < pedidosT3) ||
+                        (trabajadorMenosPedidos == t3 && pedidosT3 < pedidosT1 && pedidosT3 < pedidosT2)) {
+                        boolean asignado = asignarSiguientePedidoAutomaticamente(tienda);
+                        if (!asignado) {
+                            break;
+                        }
+                    } else {
+                        asignarPedidoManualmente(tienda);
+                        break;
+                    }
+                }
+            }
         }
     }
+
+    // Metodo para obtener el trabajador con menos pedidos
+    private static Trabajador obtenerTrabajadorConMenosPedidos(Trabajador t1, Trabajador t2, Trabajador t3) {
+        int pedidosT1 = t1.contarPedidos();
+        int pedidosT2 = t2.contarPedidos();
+        int pedidosT3 = t3.contarPedidos();
+
+        if ((pedidosT1 == pedidosT2 && pedidosT1 < pedidosT3) ||
+            (pedidosT1 == pedidosT3 && pedidosT1 < pedidosT2) ||
+            (pedidosT2 == pedidosT3 && pedidosT2 < pedidosT1)) {
+            return null;
+        }
+
+        if (pedidosT1 < pedidosT2 && pedidosT1 < pedidosT3) {
+            return t1;
+        } else if (pedidosT2 < pedidosT1 && pedidosT2 < pedidosT3) {
+            return t2;
+        } else if (pedidosT3 < pedidosT1 && pedidosT3 < pedidosT2) {
+            return t3;
+        }
+
+        return null;
+    }
+
+    // Metodo para asignar el siguiente pedido automáticamente
 
     public static boolean asignarSiguientePedidoAutomaticamente(Tienda tienda) {
         Trabajador t1 = tienda.getTrabajador1();
@@ -456,20 +531,52 @@ public class Pedido {
         return false;
     }
 
+    // Metodo para obtener el siguiente pedido sin asignar
     public static Pedido obtenerSiguientePedidoSinAsignar(Tienda tienda) {
-        if (tienda.getPedido1().getTrabajador() == null) {
+        if (tienda.getPedido1() != null && tienda.getPedido1().getTrabajador() == null) {
             return tienda.getPedido1();
         }
-        if (tienda.getPedido2().getTrabajador() == null) {
+        if (tienda.getPedido2() != null && tienda.getPedido2().getTrabajador() == null) {
             return tienda.getPedido2();
         }
-        if (tienda.getPedido3().getTrabajador() == null) {
+        if (tienda.getPedido3() != null && tienda.getPedido3().getTrabajador() == null) {
             return tienda.getPedido3();
         }
-        if (tienda.getPedido4().getTrabajador() == null) {
+        if (tienda.getPedido4() != null && tienda.getPedido4().getTrabajador() == null) {
             return tienda.getPedido4();
         }
         return null;
+    }
+
+    // Metodo para asignar un pedido manualmente
+    private static void asignarPedidoManualmente(Tienda tienda) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Seleccione el trabajador (1 para Carlos, 2 para Eduardo, 3 para JL): ");
+        int seleccionTrabajador = scanner.nextInt();
+        Trabajador trabajadorSeleccionado = null;
+
+        switch (seleccionTrabajador) {
+            case 1:
+                trabajadorSeleccionado = tienda.getTrabajador1();
+                break;
+            case 2:
+                trabajadorSeleccionado = tienda.getTrabajador2();
+                break;
+            case 3:
+                trabajadorSeleccionado = tienda.getTrabajador3();
+                break;
+            default:
+                return;
+        }
+
+        if (trabajadorSeleccionado != null && trabajadorSeleccionado.puedeAceptarPedido()) {
+            Pedido siguientePedido = obtenerSiguientePedidoSinAsignar(tienda);
+            if (siguientePedido != null) {
+                trabajadorSeleccionado.asignarPedido(siguientePedido);
+                siguientePedido.setTrabajador(trabajadorSeleccionado);
+                trabajadorSeleccionado.setContador(trabajadorSeleccionado.contarPedidos());
+            }
+        }
     }
 
     @Override

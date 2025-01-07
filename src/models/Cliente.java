@@ -1,7 +1,5 @@
 package models;
 
-import data.ProductosData;
-
 import java.util.Scanner;
 
 public class Cliente {

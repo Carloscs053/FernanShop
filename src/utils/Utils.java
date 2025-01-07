@@ -2,7 +2,6 @@ package utils;
 
 import java.util.Scanner;
 
-
 public class Utils {
     //TODO estoy tocando cosas relativamente insignificantes y eso que nos vamos ahorrando en tiempo de desarrollo
     public static void pulseParaContinuar() {
@@ -29,6 +28,7 @@ public class Utils {
             }
         }
     }
+
 
     // Metodo para validar una clave con ciertas condiciones
     //he rescatado esta validacion de un ejercicio ya hecho en clase
