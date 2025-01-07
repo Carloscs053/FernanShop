@@ -297,7 +297,6 @@ public class Cliente {
         return "-1";
     }*/
 
-
     public String pintaPedido(Cliente cliente) {
         if (pedido1 != null) {
             return pedido1.pintaPedido(cliente);
@@ -307,6 +306,8 @@ public class Cliente {
         }
         return "-1";
     }
+
+
 
     public String verPedidos(Cliente tempCliente) {
         String salida = "Tiene " + ((cuentaPedido() == 0 || cuentaPedido() == 1) ? cuentaPedido() + " pedido realizado"

@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.List;
 import java.util.Scanner;
 
 import data.ProductosData;
@@ -318,9 +319,55 @@ public class Menus {
         System.out.println("Datos del trabajador modificados exitosamente.");
     }
 
-    // Menú para el registro de usuarios
-    public static void menuRegistro() {
-        // Aquí se le pedirá al usuario que introduzca los datos para registrarse siempre que no exista ya y haya hueco entre los clientes
+    // Menú para el registro de un cliente
+    public static void menuRegistro(Tienda tienda) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("==== Registro de un nuevo cliente ====");
+        System.out.print("Ingrese su nombre: ");
+        String nombre = s.nextLine();
+        System.out.print("Ingrese su apellido: ");
+        String apellido = s.nextLine();
+        System.out.print("Ingrese su dirección: ");
+        String direccion = s.nextLine();
+        System.out.print("Ingrese su ciudad: ");
+        String ciudad = s.nextLine();
+        System.out.print("Ingrese su provincia: ");
+        String provincia = s.nextLine();
+        System.out.print("Ingrese su teléfono: ");
+        String telefono = s.nextLine();
+        System.out.print("Ingrese su email: ");
+        String email = s.nextLine();
+        System.out.print("Ingrese su contraseña: ");
+        String clave = s.nextLine();
+
+        // Verificar si alguno de los datos está vacío
+        if (nombre.isEmpty() || apellido.isEmpty() || direccion.isEmpty() || ciudad.isEmpty() || provincia.isEmpty() || telefono.isEmpty() || email.isEmpty() || clave.isEmpty()) {
+            System.out.println("Error: No se ha añadido porque no hay datos.");
+            return;
+        }
+
+        // Validar la contraseña
+        if (!Utils.validaContrasenia(clave)) {
+            System.out.println("Error: La contraseña no cumple con los requisitos.");
+            return;
+        }
+
+        // Verificar si el cliente ya existe por el email o teléfono
+        if ((tienda.getCliente1() != null && (tienda.getCliente1().getEmail().equals(email) || tienda.getCliente1().getTelefono().equals(telefono))) ||
+            (tienda.getCliente2() != null && (tienda.getCliente2().getEmail().equals(email) || tienda.getCliente2().getTelefono().equals(telefono)))) {
+            System.out.println("Error: Ya existe un cliente con ese email o teléfono.");
+            return;
+        }
+
+        // Crear una nueva instancia de Cliente
+        Cliente nuevoCliente = new Cliente(nombre, apellido, direccion, ciudad, provincia, telefono, email, clave);
+
+        // Añadir el cliente a la tienda
+        if (tienda.altaCliente(nuevoCliente)) {
+            System.out.println("Cliente registrado exitosamente.");
+        } else {
+            System.out.println("Error: No se pudo registrar el cliente. La tienda ya tiene el máximo de clientes.");
+        }
     }
 
     // Menú para el administrador
@@ -605,4 +652,6 @@ public class Menus {
         }
         Utils.pulseParaContinuar();
     }
+
+
 }

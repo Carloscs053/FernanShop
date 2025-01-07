@@ -227,7 +227,7 @@ public class MainFernanShop {
 
                 case "2":
                     // Solicitar al usuario que se registre llamando a un metodo
-                    Menus.menuRegistro();
+                    Menus.menuRegistro(tienda);
                     break;
 
                 default:

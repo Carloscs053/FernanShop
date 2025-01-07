@@ -121,8 +121,8 @@ public class Tienda {
     // Otros métodos
     // MOCK de prueba
     public void mock() {
-        this.admin = new Admin("admin", "admin@fernanshop.com", "1234");
-        this.cliente1 = ClientesData.cliente1;
+        this.admin = new Admin("admin", "admin", "1234");
+        this.cliente1 = null;
         this.cliente2 = ClientesData.cliente2;
         this.trabajador1 = TrabajadoresData.trabajador1;
         this.trabajador2 = TrabajadoresData.trabajador2;
@@ -136,11 +136,12 @@ public class Tienda {
         this.producto5 = ProductosData.Producto5;
 
         // Inicializar pedidos
-        this.pedido1 = new Pedido(producto1, producto2, producto3, "Comentario del pedido", "Recibido", 0, cliente1);
-        this.pedido2 = new Pedido(producto4, producto5, producto3, "", "Recibido", 0, cliente1);
+        this.pedido1 = null;
+        this.pedido2 = null;
         this.pedido3 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
         this.pedido4 = new Pedido(producto4, producto3, "", "Recibido", 0, cliente2);
     }
+    
 
     public boolean altaCliente(Cliente cliente) {
         if (cliente1 == null) {
@@ -165,6 +166,7 @@ public class Tienda {
         return null;
     }
 
+
     public Trabajador loginTrabajador(String email, String clave) {
         if (trabajador1 != null && trabajador1.loginTrabajador(email, clave)) return trabajador1;
         if (trabajador2 != null && trabajador2.loginTrabajador(email, clave)) return trabajador2;
@@ -184,7 +186,7 @@ public class Tienda {
         }
     }
 
-    // Método para generar el catálogo de productos
+    // Metodo para generar el catálogo de productos
     public String verCatalogo() {
         String catalogo = "";
         catalogo += ((producto1 != null) ? producto1.pintaProducto() : "") + "\n";
@@ -205,7 +207,7 @@ public class Tienda {
         return catalogo;
     }
 
-    // Método para comprobar si existe un producto con un código determinado
+    // Metodo para comprobar si existe un producto con un código determinado
     public boolean existeCodigoProducto(String codigo) {
         return (producto1 != null && producto1.getCodigo().equalsIgnoreCase(codigo)) ||
                 (producto2 != null && producto2.getCodigo().equalsIgnoreCase(codigo)) ||
@@ -215,7 +217,7 @@ public class Tienda {
     }
 
 
-    //Método que comprueba si todos los slots de clientes están ocupados
+    //Metodo que comprueba si todos los slots de clientes están ocupados
     public boolean registrosLlenos() {
         if (cliente1 != null && cliente2 != null) return true;
         return false;
@@ -290,6 +292,8 @@ public class Tienda {
         trabajadores += ((trabajador3 != null) ? getTrabajador3().toString() + "\n": "\n");
         return trabajadores;
     }
+
+    
 
     // toString
     @Override
