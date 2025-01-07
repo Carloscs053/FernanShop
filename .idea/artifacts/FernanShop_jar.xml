@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FernanShop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FernanShop_jar</output-path>
+    <root id="archive" name="FernanShop.jar">
+      <element id="module-output" name="FernanShop" />
+    </root>
+  </artifact>
+</component>
