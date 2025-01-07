@@ -126,6 +126,7 @@ public class Tienda {
         this.cliente2 = ClientesData.cliente2;
         this.trabajador1 = TrabajadoresData.trabajador1;
         this.trabajador2 = TrabajadoresData.trabajador2;
+        this.trabajador3 = TrabajadoresData.trabajador3;
 
 
         // Inicializar productos
